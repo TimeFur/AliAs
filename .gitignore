@@ -8,3 +8,5 @@
 *.tab
 
 ./AliAs/AliAs/obj/
+./AliAs/.vs/AliAs/
+
