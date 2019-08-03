@@ -7,13 +7,13 @@ logging.basicConfig(    level = logging.DEBUG,
                                              filename="log.txt'")
 
 '''==========================================================
-                    NOSET < DEBUG < INFO < WARNING < ERROR < CRITICAL
-                    >>> logging.critical("critical message")  
-                    >>> logging.debug("debug message")  
-                    >>> logging.info("info message")  
-                    >>> logging.warning("warning message")  
-                    >>> logging.error("error message")  
-                    >>> logging.critical("critical message")  
+        NOSET < DEBUG < INFO < WARNING < ERROR < CRITICAL
+        >>> logging.critical("critical message")  
+        >>> logging.debug("debug message")  
+        >>> logging.info("info message")  
+        >>> logging.warning("warning message")  
+        >>> logging.error("error message")  
+        >>> logging.critical("critical message")  
 =========================================================='''
 def main():
                         

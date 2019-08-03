@@ -1,1 +1,10 @@
 *.txt
+*.pyc
+*.exe
+*.mo
+*.po
+*.tmpl
+*.bin
+*.tab
+
+./AliAs/AliAs/obj/
