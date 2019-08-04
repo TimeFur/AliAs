@@ -2,16 +2,29 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
+{% load staticfiles %}
+<link rel = "stylesheet" type="text/css" href = "{% static 'main/css/layout.css' %}"/>
+
 <head>
     <meta charset="utf-8" />
-    <title>{{title}}</title>
+    <title>{{title}}</title>	
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" /> -->
 </head>
+
 <body>
-
-
-    <Input id="search_btn" type="button" value="search"></button>
-
-
-
+	<div id="HEADER">
+		 
+    	<Input id="search_btn" type="button" value="search"></button>
+	</div>
+	<div id="CONTENT">
+    	content content1
+	</div>
+	<div id="FOOTER">
+    	<h2>
+    		hostory
+    	</h2>
+		
+	</div>
+	
 </body>
 </html>
