@@ -10,3 +10,20 @@ def main_page(request):
                    'main/main_page.html',
                    html_dict
                    )
+
+def search_page(request):
+    html_dict = {'title':'AliAs'}
+    search_target = ""
+    
+    #get search text
+    if 'search_target' in request.GET:
+        search_target = request.GET['search_target'] #get 'name'
+    print ("search target = " + search_target)
+    
+    #get search result
+    #decorate view
+    return render(request,
+                   'main/main_page.html',
+                   html_dict
+                   )
+    

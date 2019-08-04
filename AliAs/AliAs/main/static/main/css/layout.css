@@ -1,6 +1,5 @@
 body{
 	height:100%;
-	font=family:Arial,"微軟正黑體";
 }
 
 /*HEADER section*/
@@ -11,7 +10,7 @@ body{
 	right:0px;
 	z-index:0;
 	
-	background-color:#F00FFF;
+	background-color:#FF88FF;
 	height: 30px;
 	
 }

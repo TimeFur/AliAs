@@ -12,9 +12,9 @@
 
 <body>
 	<div id="HEADER">
-		<form>
-			<Input type="text">
-			<Input id="search_btn" type="button" value="search"></button>
+		<form action='/search/' method="get">
+			<Input id="search_target" type="text" name="search_target">
+			<Input id="search_btn" type="submit" value="search"></button>
     	</form>		
 	</div>
 	<div id="CONTENT">
@@ -43,6 +43,5 @@
 	<div id="FOOTER">
 		history
 	</div>
-	
 </body>
 </html>
