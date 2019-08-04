@@ -1,0 +1,51 @@
+body{
+	height:100%;
+	font=family:Arial,"微軟正黑體";
+}
+
+/*HEADER section*/
+#HEADER{
+	position: fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	z-index:0;
+	
+	background-color:#F00FFF;
+	height: 30px;
+	
+}
+#HEADER form{
+	padding-top:2px;
+	padding-left:5px;
+}
+
+/*CONTENT section*/
+#CONTENT{
+	border-style:dotted;
+	position: absolute;
+	left:0px;
+	right:0px;
+	z-index:-1;
+	
+	background-color:red;
+	top: 35px;
+	bottom:55px;
+}
+#CONTENT p{
+	color: blue;
+}
+
+/*FOOTER section*/
+#FOOTER{
+	position: fixed;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	z-index:0;
+	
+	background-color:#00FFFF;
+	height: 30px;
+}
+#FOOTER h2{}
+
