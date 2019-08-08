@@ -12,9 +12,9 @@
 
 <body>
 	<div id="HEADER">
-		<form action='/search/' method="get">
+		<form method="get">
 			<Input id="search_target" type="text" name="search_target">
-			<Input id="search_btn" type="submit" value="search"></button>
+			<Input id="search_btn" type="button" value="search"></button>
     	</form>		
 	</div>
 	<div id="CONTENT">
@@ -27,11 +27,7 @@
 		<p>content1</p>
 		<p>content1</p>
 		<p>content1</p>
-		<p>content1</p>
-		<p>content1</p>
-		<p>content1</p>
-		<p>content1</p>
-		<p>content1</p>
+		<p>result: <span id='msgcontent'></span></p>
 		<p>content1</p>
 		<p>content1</p>
 		<p>content1</p>
@@ -43,5 +39,18 @@
 	<div id="FOOTER">
 		history
 	</div>
+	
+	
+	<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#search_btn").click(function(){
+				var search_msg = $("#search_target").val();
+				$.get("/search/", {'search_msg' : search_msg}, function(ret){
+					$('#msgcontent').html(ret);
+				})
+			});
+		});
+	</script>
 </body>
 </html>
