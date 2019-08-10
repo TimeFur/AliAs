@@ -24,7 +24,7 @@ def search_page(request):
     #get search result
     #decorate view
     #return HttpResponse(search_target)
-    return HttpResponse("search_target")
+    return HttpResponse(search_target)
     '''
     return render(request,
                    'main/main_page.html',
