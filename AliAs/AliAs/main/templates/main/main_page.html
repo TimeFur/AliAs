@@ -22,75 +22,46 @@
 </head>
 
 <body>
-	
-	<div id="HEADER" class="container">
-	
-		<form method="get">
-			<input id="search_target" type='text' placeholder="Search for ...">
-			<span class="input-group-btn">
-				<button id="search_btn" class="btn btn-default" type="button">Search</button>
-			</span>
-		</form>
-	</div>
-	
-	<div id="CONTENT">
-		<!--<iframe width="50%"
-				height="100%" 
-				frameborder="0"
-				marginheight="0"
-				marginwidth="0" 
-				id="PlayFrame" 
-				name="PlayFrame" 
-				src="https://www.linetv.tw/"></iframe>-->
-		result: <span id='msgcontent'></span>
-		
-		
-		<a id="imgclick">
-			<img class="imgsize" id="img" src="{% static 'main/element/icon_0.png' %}">
-		</a>
-		
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col">
-					<div class="blockspec">
-						<img id="img0" src="{% static 'main/element/icon_0.png' %}"/>
-					</div>
-				</div>
-				<div class="col">
-				</div>
-				<div class="col">col_3</div>
+	<div class="container-fluid">
+		<!--navigation bar-->
+		<div class="row">
+			<div class="col">
+				<form method="get">
+					<input id="search_target" type='text' placeholder="Search for ...">
+					<span class="input-group-btn">
+						<button id="search_btn" class="btn btn-default" type="button">Search</button>
+					</span>
+					
+					<span class="input-group-btn">
+						<button id="loopBtn" class="btn btn-default" type="button">Loop</button>
+					</span>
+				</form>
 			</div>
-			<div class="row">
-				<div class="col">col_1</div>
-				<div class="col">col_2</div>
-			</div>
-		</div>
+		</div>	<!--end of navigation bar-->
 		
-	</div>
-	<div id="FOOTER">
-		history
-	</div>
+		<!--main view-->
+		<div class="row flex-fill mainViewStyle">
+			<div class="col">
+				result: 
+				<span id='msgcontent'></span>
+				
+				
+				<div class="blockspec">
+					<img id="img0" src="{% static 'main/element/icon_0.png' %}"/>
+				</div>
+				
+				<div class="circleBase type1" id="circle"></div>
+			</div> <!--end of leftBar-->
+			
+			<div class="col-10">
+				Map view
+			</div> <!--end of mapView-->
+		</div> <!--end of main_view-->
+	</div> <!-- end of container-fluid -->
 	
 	<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-	<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script>
-		$(document).ready(function(){
-			$("#search_btn").click(function(){
-				var search_msg = $("#search_target").val();
-				$.get("/search/", {'search_msg' : search_msg}, function(ret){
-					$('#msgcontent').html(ret);
-				})
-			});
-			
-			$("#imgclick").click(function(){
-				var search_msg = $("#search_target").val();
-				$.get("/search/", {'search_msg' : search_msg}, function(ret){
-					$('#msgcontent').html(ret);
-				})
-			});
-		});
-	</script>
+	<script src="{% static 'main/scripts/main.js' %}"></script>
 </body>
 </html>
