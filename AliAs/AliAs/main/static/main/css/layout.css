@@ -8,7 +8,6 @@ body{
 	margin-left: 10px;
 
 	width:100%;
-	height: 50px;
 	z-index:0;
 }
 .container #search_target{
@@ -21,8 +20,6 @@ body{
 /*CONTENT section*/
 .mainViewStyle{
 	background-color:#00FFFF;
-	
-	margin-bottom: 4px;
 }
 
 .flex-fill {
@@ -34,11 +31,17 @@ body{
 }
 .blockspec{
 	width:50px;
-	height:50px;
 }
 .blockspec #img0{
 	width:100%;
 	height:100%;	
+}
+
+.rowBuffer{ 
+	margin-top:5px;
+	background-image: linear-gradient(#ffffff, #9198e5);
+	filter:brightness(100%);
+	filter:contrast(100%);
 }
 
 /*circle style*/

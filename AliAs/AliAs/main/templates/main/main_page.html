@@ -42,15 +42,29 @@
 		<!--main view-->
 		<div class="row flex-fill mainViewStyle">
 			<div class="col">
-				result: 
-				<span id='msgcontent'></span>
-				
-				
-				<div class="blockspec">
-					<img id="img0" src="{% static 'main/element/icon_0.png' %}"/>
+				<div class="row rowBuffer">
+					<div class="col">
+						result:<span id='msgcontent'></span>
+					</div>
+				</div>
+				<div class="row rowBuffer">	
+					<div class="col">
+						<div class="blockspec">
+							<img id="img0" src="{% static 'main/element/icon_0.png' %}"/>
+						</div>
+					</div>
+				</div>
+				<div class="row rowBuffer">
+					<div class="col">
+						<div class="circleBase type1" id="circle"></div>
+					</div>
+				</div>
+				<div class="row rowBuffer">
+					<div class="col text-right">
+						result:
+					</div>
 				</div>
 				
-				<div class="circleBase type1" id="circle"></div>
 			</div> <!--end of leftBar-->
 			
 			<div class="col-10">
