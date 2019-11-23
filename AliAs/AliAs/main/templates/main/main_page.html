@@ -26,52 +26,54 @@
 
 <body>
 	<div class="container-fluid">
-		<!--navigation bar-->
-		<div class="row">
-			<div class="col">
-				<form method="get">
-					<div class="search-bar">
-						<div class="search-box">
-							<input class="search-txt" type="text" placeholder="what you want ...">
-							<a class="search-btn">
-								<i class="fas fa-search"></i>
-							</a>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>	<!--end of navigation bar-->
-		
 		<!--main view-->
 		<div class="row flex-fill mainViewStyle">
-			<div class="col">
+			<!--Video Bar-->
+			<div class="col-sm-8">
+				<!--search video bar-->
 				<div class="row rowBuffer">
 					<div class="col">
-						result:<span id='msgcontent'></span>
+						Search Video<span id='msgcontent'></span>
 					</div>
 				</div>
-				<div class="row rowBuffer">	
+				
+				<!--Video Player frame-->
+				<div class="row">	
 					<div class="col">
 						<div class="blockspec">
-							<img id="img0" src="{% static 'main/element/icon_0.png' %}"/>
+							<iframe width="1000" height="500"
+								src="https://www.youtube.com/embed/yIMDgPKgN1w">
+							</iframe>
 						</div>
 					</div>
 				</div>
+				
+				<!--Collection-->
 				<div class="row rowBuffer">
 					<div class="col">
+						Collection
 						<div class="circleBase type1" id="circle"></div>
 					</div>
 				</div>
+				
+				<!--Message-->
 				<div class="row rowBuffer">
 					<div class="col text-right">
 						result:
 					</div>
 				</div>
-				
-			</div> <!--end of leftBar-->
+			</div> <!--end of Video leftBar-->
 			
-			<div class="col-10">
-				Map view
+			<!--Search Bar-->
+			<div class="col-sm-4">
+				<div class="search-bar">
+					<div class="search-box">
+						<input class="search-txt" type="text" placeholder = "Search">
+						<a class="search-btn">
+							<i class="fas fa-search"></i>
+						</a>
+					</div>
+				</div>
 			</div> <!--end of mapView-->
 		</div> <!--end of main_view-->
 	</div> <!-- end of container-fluid -->
