@@ -17,6 +17,18 @@ body{
 	margin-left: 10px;
 }
 
+.searchVideo-textbar{
+	height: 40px;
+	width: 90%;
+	
+	font-size: 20px;
+}
+
+.searchVideo-btn{
+	width: 40px;
+	height: 40px;
+}
+
 .search-bar{
 	height: 60px;
 	padding: 0;

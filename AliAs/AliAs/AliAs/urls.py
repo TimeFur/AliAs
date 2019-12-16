@@ -30,5 +30,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('alias/', main_views.main_page),
-    path('search/', main_views.search_page)
+    path('search/', main_views.search_page),
+    path('searchVideo/', main_views.searchVideo_page),
 ]

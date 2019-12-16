@@ -20,10 +20,19 @@ $(document).ready(function(){
 	
 	$("#loopBtn").click(function(){
 		setInterval(function(){
-			$("#img").animate({	
-								width:"+=1px"});
+			$("#img").animate({width:"+=1px"});
 			
 			console.log($('#img').width());
 		}, 500);
 	});
+	
+	$("#searchVideo_btn").click(function(){
+		console.log("Click");
+		var videoID = $("#searchVideo_ID").val();
+		
+		$.get("/searchVideo/", {"videoID" : videoID}, function(ret){
+			
+		})
+	});
+	
 });

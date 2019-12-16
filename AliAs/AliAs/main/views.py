@@ -31,3 +31,13 @@ def search_page(request):
                    html_dict
                    )
     '''
+def searchVideo_page(request):
+
+    videoId = "None"
+    
+    if 'searchVideo_ID' in request.GET:
+        videoId = request.GET['videoID']
+
+    print (videoId)
+
+    return HttpResponse(search_target)
