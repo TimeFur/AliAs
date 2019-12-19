@@ -87,7 +87,8 @@
 				
 				<!--Message-->
 				<div>
-					<input id="streamshot_id" type="button" value="streaming" onclick="startstream();" />
+					<input id="streamshot_id" type="button" value="streaming" onclick="startstream();"/>
+					<input id="screenshot_id" type="button" value="screenshot" onclick="screenShot();"/>
 				</div>
 				
 				<div>
@@ -114,6 +115,29 @@
 	<script src="{% static 'main/scripts/main.js' %}"></script>
 	<script src="{% static 'main/scripts/stream.js'%}"></script>
 	<script src="{% static 'main/scripts/screenshot.js'%}"></script>
-	
+	<script>
+	async function screenShot(){
+		var data = { 
+			type: "FROM_PAGE", 
+			text: "Screen Shot!" 
+		};
+		
+		//send to extension
+		window.postMessage(data, "*");
+		
+		//wait response from extension
+		window.addEventListener('message', function(event){
+			
+			if (event.source != window) 
+				return;
+
+			if (event.data.type && event.data.type == 'FROM_EXTENSION') {
+				console.log('Content script received: ' + event.data.text);
+			}
+		  },
+		  false
+		);
+	}
+	</script>
 </body>
 </html>

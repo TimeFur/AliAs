@@ -33,6 +33,5 @@ $(document).ready(function(){
 		$.get("/searchVideo/", {"videoID" : videoID}, function(ret){
 			
 		})
-	});
-	
+	});	
 });
