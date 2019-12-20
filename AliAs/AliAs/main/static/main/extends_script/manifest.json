@@ -5,6 +5,8 @@
 	"manifest_version": 2,
 	"version": "0.1",
 	
+	"permissions": ["storage", "activeTab", "downloads"],
+	
 	"browser_action": {
 		"default_popup": "popup.html",
 		"default_icon": "icon.png"
@@ -12,7 +14,7 @@
 	
 	"background": {
 		"scripts": ["background.js"],
-		"persistent": false
+		"persistent": true
 	},
 	
 	"content_scripts": [
@@ -20,7 +22,5 @@
 			"matches": ["http://127.0.0.1:8000/alias/"],
 			"js": ["content.js"]
 		}
-	],
-	
-	"permissions": ["storage", "activeTab", "downloads"]
+	]
 }

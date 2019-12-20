@@ -1,7 +1,7 @@
 
 //https://pjchender.github.io/2019/05/21/chrome-content-script/
 window.addEventListener('message', function(event){
-	//var port = chrome.runtime.connect();
+	
     // We only accept messages from ourselves
 	var data = { 
 		type: "FROM_EXTENSION", 
@@ -11,13 +11,29 @@ window.addEventListener('message', function(event){
     if (event.source != window) 
 		return;
 
-	//get message
-    if (event.data.type && event.data.type == 'FROM_PAGE') {
-		console.log('Website received: ' + event.data.text);
+	switch (event.data.type)
+	{
+		case "FROM_PAGE":
+			//get message
+			console.log('Website received = ' + event.data.text);
+			
+			//call screen shot api [to background.js]
+			chrome.runtime.sendMessage(
+				{type: "FROM_CONTENT_SCREENSHOT"}, 
+				function(response){
+					//console.log(response.screenshot_url);
+					console.log("Response from background: " + response);
+					
+					//send response
+					data.text = response;
+					window.postMessage(data, "*");
+			});
+			
+		break;
 		
-		//send response
-		window.postMessage(data, "*");
-    }
+		default:
+		break;
+	}
   },
   false
 );

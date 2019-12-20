@@ -121,7 +121,6 @@
 			type: "FROM_PAGE", 
 			text: "Screen Shot!" 
 		};
-		
 		//send to extension
 		window.postMessage(data, "*");
 		
@@ -132,7 +131,7 @@
 				return;
 
 			if (event.data.type && event.data.type == 'FROM_EXTENSION') {
-				console.log('Content script received: ' + event.data.text);
+				console.log('From Content script received: ' + event.data.text);
 			}
 		  },
 		  false
