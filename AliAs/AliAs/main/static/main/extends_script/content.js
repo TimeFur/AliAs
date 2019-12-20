@@ -21,11 +21,10 @@ window.addEventListener('message', function(event){
 			chrome.runtime.sendMessage(
 				{type: "FROM_CONTENT_SCREENSHOT"}, 
 				function(response){
-					//console.log(response.screenshot_url);
-					console.log("Response from background: " + response);
+					//console.log("Response from background: " + response.imgSrc);
 					
 					//send response
-					data.text = response;
+					data.text = response.imgSrc;
 					window.postMessage(data, "*");
 			});
 			

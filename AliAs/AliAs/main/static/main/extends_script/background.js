@@ -4,24 +4,31 @@ chrome.runtime.onInstalled.addListener(function(){
 	});
 });
 
-
+//https://stackoverflow.com/questions/18794407/chrome-extension-api-chrome-tabs-capturevisibletab-on-background-page-to-conten
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	
 	switch(request.type)
 	{
 		case "FROM_CONTENT_SCREENSHOT":
 			var image_url = "None";
-			chrome.tabs.captureVisibleTab(null, {}, function (image) {
-				image_url = image;
-			});
-			sendResponse(image_url);
+			
+			chrome.tabs.captureVisibleTab(
+				null, 
+				{}, 
+				function (dataUrl) {
+					image_url = dataUrl;
+					sendResponse({imgSrc : dataUrl});
+				}
+			);
+			//chrome.tabs.create({ url: "www.google.com" });
 		break;
 		
 		default:
 			console.log("chrome listener default");
 			
-			sendResponse('default~~~');
+			sendResponse('default!!!');
 		break;
 	}
-	
+
+	return true;
 });
