@@ -5,7 +5,7 @@ window.addEventListener('message', function(event){
     // We only accept messages from ourselves
 	var data = { 
 		type: "FROM_EXTENSION", 
-		text: "Data from content js" 
+		imgSrc: "Data from content js" 
 	};
 	
     if (event.source != window) 
@@ -24,7 +24,7 @@ window.addEventListener('message', function(event){
 					//console.log("Response from background: " + response.imgSrc);
 					
 					//send response
-					data.text = response.imgSrc;
+					data.imgSrc = response.imgSrc;
 					window.postMessage(data, "*");
 			});
 			

@@ -20,15 +20,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 					sendResponse({imgSrc : dataUrl});
 				}
 			);
-			//chrome.tabs.create({ url: "www.google.com" });
 		break;
 		
 		default:
 			console.log("chrome listener default");
-			
 			sendResponse('default!!!');
 		break;
 	}
-
+	//allow sendResponse async, let captureVisibleTab sendReponse
 	return true;
 });

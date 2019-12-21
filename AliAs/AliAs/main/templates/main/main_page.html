@@ -92,18 +92,10 @@
 				</div>
 				
 				<div>
-					<p>
-						<button id="start">Start Capture</button>&nbsp;
-						<button id="stop">Stop Capture</button>
-					</p>
-					
-					<video id="video" autoplay></video>
-					<br>
-					
-					<strong>Log:</strong>
-					<br>
-					
-					<pre id="log"></pre>
+					<div>
+					  <p>SreenShot img</p>
+					  <img id="img_id" src="" />
+					</div>
 				</div>
 			</div> <!--end of mapView-->
 		</div> <!--end of main_view-->
@@ -121,17 +113,20 @@
 			type: "FROM_PAGE", 
 			text: "Screen Shot!" 
 		};
-		//send to extension
+		//send to extension [content]
 		window.postMessage(data, "*");
 		
-		//wait response from extension
+		//wait response from extension [content]
 		window.addEventListener('message', function(event){
 			
 			if (event.source != window) 
 				return;
 
 			if (event.data.type && event.data.type == 'FROM_EXTENSION') {
-				console.log('From Content script received: ' + event.data.text);
+				console.log('From Content script received: ' + event.data.imgSrc);
+				
+				//set to image src
+				document.getElementById("img_id").src = event.data.imgSrc;
 			}
 		  },
 		  false
