@@ -7,9 +7,20 @@
     <meta charset="utf-8" />	
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	<!-- Load local static css -->
+	<!--Load static file-->
 	{% load staticfiles %}
+	
+	<!--CSS-->
 	<link rel = "stylesheet" type="text/css" href = "{% static 'main/css/layout.css' %}" charset="utf-8">
+	
+	<!--Script-->
+	<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<script src="{% static 'main/scripts/main.js' %}"></script>
+	<script src="{% static 'main/scripts/stream.js' %}"></script>
+	<script src="{% static 'main/scripts/screenshot.js' %}"></script>
 	
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,94 +29,72 @@
 			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
 			crossorigin="anonymous">
 
-	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-	
+	<!--MAIN TITLE-->
     <title>{{title}}</title>
 	<link rel="icon" href="{% static 'main/element/icon_0.png' %}" type="image/x-icon" />
 </head>
 
 <body>
 	<div class="container-fluid">
+		
 		<!--main view-->
 		<div class="row flex-fill mainViewStyle">
 			<!--Video Bar-->
 			<div class="col-sm-8">
 				<!--search video bar-->
-				<div class="row">
-					<div class="col">
-						<input 	id="searchVideo_ID"
-								class="searchVideo-textbar" 
-								type="text"
-								placeholder="Search Video..." 
-								name="search">
-						<button id="searchVideo_btn" type="button" class="btn-info searchVideo-btn">
-							<i class="fa fa-search"></i>
-						</button>
-					</div>
+				<div style="height: 10%;">
+					<input 	id="searchVideoID"
+							class="searchVideo-textbar" 
+							type="text"
+							placeholder="Search Video..." 
+							name="search">
+					<button id="searchVideo_btn" 
+							type="button" 
+							class="btn-info searchVideo-btn">
+						<i class="fa fa-search"></i>
+					</button>
 				</div>
 				
 				<!--Video Player frame-->
-				<div class="row">	
-					<div class="col">
-						<div class="blockspec">
-							<iframe width="1000" height="500"
-								src="https://www.youtube.com/embed/MOLCGtqtd_E">
-							</iframe>
-						</div>
-					</div>
+				<div style="height: 70%;">	
+					<iframe id="videoSrc" frameborder="1"
+						src="https://www.youtube.com/embed/MOLCGtqtd_E"
+						style="position: relative; height: 100%; width: 100%;">
+					</iframe>
 				</div>
 				
 				<!--Collection-->
-				<div class="row rowBuffer">
-					<div class="col">
-						Collection
-						<div class="circleBase type1" id="circle"></div>
-					</div>
-				</div>
-				
-				<!--Message-->
-				<div class="row rowBuffer">
-					<div class="col text-right">
-						result:
-					</div>
+				<div style="height: 20%;">
+					<img id="img_id" src="" width = 100 height = 100 />
 				</div>
 			</div> <!--end of Video leftBar-->
 			
 			<!--Search Bar-->
 			<div class="col-sm-4">
-				<input type="text" size="40" onkeypress="myFunction(event)">
-				<text id ="demo"/>
-				
-				<div class="search-bar">
-					<div class="search-box">
-						<input class="search-txt" type="text" placeholder = "Search">
-						<a class="search-btn">
-							<i class="fas fa-search"></i>
-						</a>
-					</div>
+				<div style="height: 10%;">
+					<input 	id="searchID"
+							class="searchVideo-textbar" 
+							type="text"
+							placeholder="Search ..." 
+							name="search">
+					<button id="search_btn" 
+							type="button" 
+							class="btn-info searchVideo-btn">
+						<i class="fa fa-search"></i>
+					</button>
 				</div>
 				
-				<!--Message-->
-				<div>
-					<input id="streamshot_id" type="button" value="streaming" onclick="startstream();"/>
+				<!--Test bar-->
+				<div style="height: 10%;">
 					<input id="screenshot_id" type="button" value="screenshot"/>
 				</div>
 				
-				<div>
-					<div>
-					  <p>SreenShot img</p>
-					  <img id="img_id" src="" width="500" height="500"/>
-					</div>
+				<div style="height: 80%;">
+					Search Info
 				</div>
+				
 			</div> <!--end of mapView-->
 		</div> <!--end of main_view-->
 	</div> <!-- end of container-fluid -->
-	
-	<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="{% static 'main/scripts/main.js' %}"></script>
-	<script src="{% static 'main/scripts/stream.js' %}"></script>
-	<script src="{% static 'main/scripts/screenshot.js' %}"></script>
 </body>
 </html>

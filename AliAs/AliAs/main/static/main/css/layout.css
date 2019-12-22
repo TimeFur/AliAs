@@ -86,7 +86,8 @@ body{
 	height:12%;
 }
 .blockspec{
-	width:50px;
+	position: relative;
+	width: 100%;
 }
 .blockspec #img0{
 	width:100%;
@@ -110,5 +111,3 @@ body{
     height: 100px;
     background: #ccc;
 }
-
-
