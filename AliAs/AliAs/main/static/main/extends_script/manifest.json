@@ -5,7 +5,7 @@
 	"manifest_version": 2,
 	"version": "0.1",
 	
-	"permissions": ["storage", "activeTab", "downloads", "<all_urls>"],
+	"permissions": ["storage", "activeTab", "downloads", "tabs", "<all_urls>"],
 	
 	"browser_action": {
 		"default_popup": "popup.html",
