@@ -16,27 +16,44 @@ $(document).ready(function(){
 			if (event.source != window) 
 				return;
 
-			if (event.data.type && event.data.type == 'FROM_EXTENSION') {
-				//console.log('From Content script received: ' + event.data.imgSrc);
-				
-				//set to image src	
-				imgSrc.src = event.data.imgSrc;
-				
-				//send to [view]
-				$.ajax({
-					type: "POST",
-					url: "/imgsrc/",
-					data: {
-						"imgSrc": imgSrc.src
-					},
-					success: function(response){
-						
-					}
-				});
+			switch(event.data.type)
+			{
+				case "FROM_EXTENSION":
+					//set to image src	
+					imgSrc.src = event.data.imgSrc;
+					
+					//send to [view]
+					$.ajax({
+						type: "POST",
+						url: "/imgsrc/",
+						data: {
+							"imgSrc": imgSrc.src
+						},
+						success: function(response){
+							
+						}
+					});
+				break;
 			}
 		  },
 		  false
 		);
 			
 	});
+
+	//get videoUrl response from extension [content]
+	window.addEventListener('message', function(event){
+		
+		if (event.source != window) 
+			return;
+		
+		switch(event.data.type)
+		{
+			case "FROM_EXTENSION_VIDEOURL":
+				console.log("FROM_EXTENSION_VIDEOURL URL = " + event.data.videoUrl);
+			break;
+		}
+	  },
+	  false
+	);	
 });
