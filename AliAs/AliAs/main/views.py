@@ -1,20 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-
 import base64
 # Create your views here.
 
 POST_IMG_SRC_KEY = "imgSrc"
+POST_VIDEOURL_SRC_KEY = "videoUrl"
 
 def main_page(request):
     print ("AliAs main access")
     html_dict = {'title':'AliAs'}
-
+    
     return render(request,
                    'main/main_page.html',
-                   html_dict
-                   )
+                   html_dict)
 
 def search_page(request):
     html_dict = {'title':'AliAs'}
@@ -65,3 +64,14 @@ def get_imgSrc(request):
         #print ("ImgSrc get = " + request.POST[POST_IMG_SRC_KEY])
         
     return HttpResponse(status)
+
+@csrf_exempt
+def get_VideoUrl(request):
+    videoUrl = "https://www.youtube.com/embed/"
+    
+    if POST_VIDEOURL_SRC_KEY in request.POST:
+        url = request.POST[POST_VIDEOURL_SRC_KEY]
+        videoUrl = videoUrl + url[url.find('v=') + 2:]
+        print (videoUrl)
+        
+    return HttpResponse(videoUrl)

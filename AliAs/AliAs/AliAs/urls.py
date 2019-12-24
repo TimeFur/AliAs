@@ -32,5 +32,6 @@ urlpatterns = [
     path('alias/', main_views.main_page),
     path('search/', main_views.search_page),
     path('searchVideo/', main_views.searchVideo_page),
-    path('imgsrc/', main_views.get_imgSrc)
+    path('imgsrc/', main_views.get_imgSrc),
+    path('getVideoUrl/', main_views.get_VideoUrl),
 ]

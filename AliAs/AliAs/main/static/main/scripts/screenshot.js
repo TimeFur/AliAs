@@ -51,6 +51,20 @@ $(document).ready(function(){
 		{
 			case "FROM_EXTENSION_VIDEOURL":
 				console.log("FROM_EXTENSION_VIDEOURL URL = " + event.data.videoUrl);
+				
+				//send videoUrl to [view]
+				$.ajax({
+					type: "POST",
+					url: "/getVideoUrl/",
+					data: {
+						"videoUrl": event.data.videoUrl
+					},
+					success: function(response){
+						console.log("VideoUrl send done");
+						$("#scrText").text(response);
+						$('#videoSrc').attr('src', response);
+					}
+				});
 			break;
 		}
 	  },
