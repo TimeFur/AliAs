@@ -15,7 +15,6 @@ window.addEventListener('message', function(event){
 	{
 		case "FROM_PAGE":
 			//get message
-			console.log('Website received = ' + event.data.text);
 			
 			//call screen shot api [to background.js]
 			chrome.runtime.sendMessage(
