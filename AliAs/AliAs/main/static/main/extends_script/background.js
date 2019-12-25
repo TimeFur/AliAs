@@ -53,7 +53,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 //https://www.bennettnotes.com/post/fix-receiving-end-does-not-exist/
 function injectContentScript(id, msg){
 	//inject content scripts & send tab message
-	chrome.tabs.executeScript(	null, {file: "content.js"},	function(res){
+	chrome.tabs.executeScript(	null, {file: "toggleWeb.js"},	function(res){
 								chrome.tabs.sendMessage(id, 
 														msg, 
 														function(response){

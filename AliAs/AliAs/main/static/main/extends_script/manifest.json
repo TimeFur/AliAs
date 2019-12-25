@@ -20,7 +20,7 @@
 	"content_scripts": [
 		{
 			"matches": ["http://127.0.0.1:8000/alias/"],
-			"js": ["content.js"]
+			"js": ["content.js", "toggleWeb.js"]
 		}
 	]
 }
