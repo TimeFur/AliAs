@@ -16,14 +16,7 @@ $(document).ready(function(){
 	});
 	
 	$("#btn0_id").click(function(){
-		// $('#imgList').children().each(function(index){
-			// console.log($(this).text());
-		// });
-		var result = $('#imgList').children().attr("id");
-		
-		$.each(imgArray, function(index, dict){
-			console.log(dict['id']);
-		});
+		// document.getElementById('popupImgForm').style.display = "block";
 	});
 	
 	//Hover event
@@ -33,20 +26,27 @@ $(document).ready(function(){
 		//loop imgList item & bind hover event
 		var children = document.getElementById('imgList').children;
 		$.each(children, function(index, value){
-			$('#' + value['id']).hover(function(){
-				console.log("Get imgSrc => " + value['id']);
-			}, function(){});	
+			
+			$('#' + value['id']).hover(function(event){
+				
+				console.log("X: " + event.pageX + ",Y: " + event.pageY);
+				
+				//show popup form
+				popFormSwitch("POPUP", value, event);
+			}, function(event){
+				//hidden popup form
+				popFormSwitch("HIDDEN", value, event);
+			});	
 		});
 		
 	}, 	function(){
+		console.log("handler out");
 		
 		//unbind element hover
 		var children = document.getElementById('imgList').children;
 		$.each(children, function(index, value){
 			$('#' + value['id']).unbind();
 		});
-		
-		$('#imgList').unbind();
 	});
 	
 	//window listener
@@ -112,5 +112,33 @@ $(document).ready(function(){
 		imgArray.push(imgDict);
 		
 		$('#imgList').append(insertImgHtml);	
+	}
+	
+	function popFormSwitch(cmd, imgInfo, event)
+	{
+		//imgInfo is HTML format ['id'] ['src'] ['width'] ['height']
+		var popupObject = document.getElementById('popupImgForm');
+		var posX = '0px';
+		var posY = '0px';
+		
+		if (event != null)
+		{
+			posX = ($('#' + imgInfo['id']).position().left + $('#' + imgInfo['id']).width()) + 'px';
+			posY = ($('#' + imgInfo['id']).position().top - $('#popupImgForm').height()) + 'px';
+		}
+		
+		console.log("imgList posX = " + posX + ", posY = "+ posY);
+		if (cmd == "POPUP")
+		{
+			document.getElementById('popImgId').src = imgInfo['src'];
+			popupObject.style.left = posX;
+			popupObject.style.top = posY;
+			popupObject.style.display = "block";
+		}
+		else if(cmd == "HIDDEN")
+		{
+			// popupObject.style.left = "0px";
+			popupObject.style.display = "none";
+		}
 	}
 });

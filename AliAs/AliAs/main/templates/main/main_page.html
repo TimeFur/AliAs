@@ -12,6 +12,7 @@
 	
 	<!--CSS-->
 	<link rel = "stylesheet" type="text/css" href = "{% static 'main/css/layout.css' %}" charset="utf-8">
+	<link rel = "stylesheet" type="text/css" href = "{% static 'main/css/popup.css' %}" charset="utf-8">
 	
 	<!--Script-->
 	<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -67,6 +68,12 @@
 				<div id="imgList" style="height: 20%; border-top: 5px solid grey; margin-right:-20px; margin-left:-20px;">
 					
 				</div>
+				<!--POP form-->					
+				<div id="popupImgForm" class="white_content">
+					<img id="popImgId" src="" width = 100 height = 100></img>
+					<input id="btn_popImgSearch" type="button" value="Search"/>
+					<input id="btn_popImgDel" type="button" value="Del"/>
+				</div>
 			</div> <!--end of Video leftBar-->
 			
 			<!--Search Bar-->
@@ -88,6 +95,8 @@
 				<div style="height: 10%;">
 					<input id="screenshot_id" type="button" value="screenshot"/>
 					<input id="btn0_id" type="button" value="Btn_0"/>
+					
+					
 					<li id="scrText"></li>
 				</div>
 				
