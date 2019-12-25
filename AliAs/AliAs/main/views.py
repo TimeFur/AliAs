@@ -71,7 +71,13 @@ def get_VideoUrl(request):
     
     if POST_VIDEOURL_SRC_KEY in request.POST:
         url = request.POST[POST_VIDEOURL_SRC_KEY]
-        videoUrl = videoUrl + url[url.find('v=') + 2:]
+        start = url.find('v=') + 2
+        end = -1
+        if url.find('&') > 0:
+            end = url.find('&')
+            videoUrl = videoUrl + url[start:end]
+        else:
+            videoUrl = videoUrl + url[start:]
         print (videoUrl)
         
     return HttpResponse(videoUrl)
