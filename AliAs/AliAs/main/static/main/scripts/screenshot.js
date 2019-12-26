@@ -2,6 +2,9 @@ $(document).ready(function(){
 	
 	var id = 0;
 	var imgArray = [];
+	var popupHoverFlag = false;
+	var hoverFlag = false;
+	var hiddenTime = 125;
 	
 	//Click listener
 	$("#screenshot_id").click(function(){
@@ -22,6 +25,7 @@ $(document).ready(function(){
 	//Hover event
 	$('#imgList').hover(function(){
 		console.log("handler in");
+		hoverFlag = true;
 		
 		//loop imgList item & bind hover event
 		var children = document.getElementById('imgList').children;
@@ -32,21 +36,32 @@ $(document).ready(function(){
 				console.log("X: " + event.pageX + ",Y: " + event.pageY);
 				
 				//show popup form
+				
 				popFormSwitch("POPUP", value, event);
 			}, function(event){
-				//hidden popup form
-				popFormSwitch("HIDDEN", value, event);
+				hiddenPopupForm(hiddenTime);
 			});	
 		});
 		
 	}, 	function(){
+		hoverFlag = false;
 		console.log("handler out");
+		
+		hiddenPopupForm(hiddenTime);
 		
 		//unbind element hover
 		var children = document.getElementById('imgList').children;
 		$.each(children, function(index, value){
 			$('#' + value['id']).unbind();
 		});
+	});
+	
+	$('#popupImgForm').hover(function(){
+		popupHoverFlag = true;
+	}, function(){
+		popupHoverFlag = false;
+		
+		hiddenPopupForm(hiddenTime);
 	});
 	
 	//window listener
@@ -121,7 +136,7 @@ $(document).ready(function(){
 		var posX = '0px';
 		var posY = '0px';
 		
-		if (event != null)
+		if (event != null && imgInfo != null)
 		{
 			posX = ($('#' + imgInfo['id']).position().left + $('#' + imgInfo['id']).width()) + 'px';
 			posY = ($('#' + imgInfo['id']).position().top - $('#popupImgForm').height()) + 'px';
@@ -137,8 +152,19 @@ $(document).ready(function(){
 		}
 		else if(cmd == "HIDDEN")
 		{
-			// popupObject.style.left = "0px";
+			popupObject.style.top = "0px";
+			popupObject.style.left = "0px";
 			popupObject.style.display = "none";
 		}
+	}
+	
+	function hiddenPopupForm(hidden_timeout){
+		setTimeout(function(){
+			if (popupHoverFlag == false && hoverFlag == false)
+			{
+				//hidden popup form
+				popFormSwitch("HIDDEN", null, null);	
+			}	
+		}, hidden_timeout);
 	}
 });
