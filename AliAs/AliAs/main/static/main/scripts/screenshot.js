@@ -2,6 +2,7 @@ $(document).ready(function(){
 	
 	var id = 0;
 	var imgArray = [];
+	var videoObject = $("#videoFrameId");
 	
 	//Click listener
 	$("#screenshot_id").click(function(){
@@ -17,6 +18,11 @@ $(document).ready(function(){
 	
 	$("#btn0_id").click(function(){
 		// document.getElementById('popupImgForm').style.display = "block";
+	});
+	
+	//mouse event
+	videoObject.mousemove(function(event){
+		console.log("Mouse event = " + event.pageX + ", " + event.pageY);
 	});
 	
 	//window listener

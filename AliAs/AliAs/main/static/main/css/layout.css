@@ -114,9 +114,16 @@ body{
 
 /*video css*/
 .videoFrameClass{
-	height: 75%; 
+	height: 75%;
 	margin-right: -20px; 
 	margin-left: -20px;
+}
+.videoSrcClass{
+	position: relative; 
+	z-index: 1;
+	height: 100%; 
+	width: 100%; 
+	pointer-events: none
 }
 
 /*imgList css*/
