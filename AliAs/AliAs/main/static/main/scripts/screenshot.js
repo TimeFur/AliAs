@@ -2,9 +2,6 @@ $(document).ready(function(){
 	
 	var id = 0;
 	var imgArray = [];
-	var popupHoverFlag = false;
-	var hoverFlag = false;
-	var hiddenTime = 125;
 	
 	//Click listener
 	$("#screenshot_id").click(function(){
@@ -22,48 +19,6 @@ $(document).ready(function(){
 		// document.getElementById('popupImgForm').style.display = "block";
 	});
 	
-	//Hover event
-	$('#imgList').hover(function(){
-		console.log("handler in");
-		hoverFlag = true;
-		
-		//loop imgList item & bind hover event
-		var children = document.getElementById('imgList').children;
-		$.each(children, function(index, value){
-			
-			$('#' + value['id']).hover(function(event){
-				
-				console.log("X: " + event.pageX + ",Y: " + event.pageY);
-				
-				//show popup form
-				
-				popFormSwitch("POPUP", value, event);
-			}, function(event){
-				hiddenPopupForm(hiddenTime);
-			});	
-		});
-		
-	}, 	function(){
-		hoverFlag = false;
-		console.log("handler out");
-		
-		hiddenPopupForm(hiddenTime);
-		
-		//unbind element hover
-		var children = document.getElementById('imgList').children;
-		$.each(children, function(index, value){
-			$('#' + value['id']).unbind();
-		});
-	});
-	
-	$('#popupImgForm').hover(function(){
-		popupHoverFlag = true;
-	}, function(){
-		popupHoverFlag = false;
-		
-		hiddenPopupForm(hiddenTime);
-	});
-	
 	//window listener
 	window.addEventListener('message', function(event){
 		
@@ -71,26 +26,7 @@ $(document).ready(function(){
 			return;
 		
 		switch(event.data.type)
-		{
-			//get videoUrl response from extension [content]
-			case "FROM_EXTENSION_VIDEOURL":
-				console.log("FROM_EXTENSION_VIDEOURL URL = " + event.data.videoUrl);
-				
-				//send videoUrl to [view]
-				$.ajax({
-					type: "POST",
-					url: "/getVideoUrl/",
-					data: {
-						"videoUrl": event.data.videoUrl
-					},
-					success: function(response){
-						console.log("VideoUrl send done");
-						$("#scrText").text(response);
-						$('#videoSrc').attr('src', response);
-					}
-				});
-			break;
-			
+		{			
 			//get Screenshot response from extension [content]
 			case "FROM_EXTENSION":
 				console.log("Show Screenshot");
@@ -114,7 +50,7 @@ $(document).ready(function(){
 		}
 	  },
 	  false
-	);	
+	);
 	
 	function insertImgSrc(id, imgSrc, videoTime){
 		var img_id = "imgList_item" + id;
@@ -127,44 +63,5 @@ $(document).ready(function(){
 		imgArray.push(imgDict);
 		
 		$('#imgList').append(insertImgHtml);	
-	}
-	
-	function popFormSwitch(cmd, imgInfo, event)
-	{
-		//imgInfo is HTML format ['id'] ['src'] ['width'] ['height']
-		var popupObject = document.getElementById('popupImgForm');
-		var posX = '0px';
-		var posY = '0px';
-		
-		if (event != null && imgInfo != null)
-		{
-			posX = ($('#' + imgInfo['id']).position().left + $('#' + imgInfo['id']).width()) + 'px';
-			posY = ($('#' + imgInfo['id']).position().top - $('#popupImgForm').height()) + 'px';
-		}
-		
-		console.log("imgList posX = " + posX + ", posY = "+ posY);
-		if (cmd == "POPUP")
-		{
-			document.getElementById('popImgId').src = imgInfo['src'];
-			popupObject.style.left = posX;
-			popupObject.style.top = posY;
-			popupObject.style.display = "block";
-		}
-		else if(cmd == "HIDDEN")
-		{
-			popupObject.style.top = "0px";
-			popupObject.style.left = "0px";
-			popupObject.style.display = "none";
-		}
-	}
-	
-	function hiddenPopupForm(hidden_timeout){
-		setTimeout(function(){
-			if (popupHoverFlag == false && hoverFlag == false)
-			{
-				//hidden popup form
-				popFormSwitch("HIDDEN", null, null);	
-			}	
-		}, hidden_timeout);
 	}
 });

@@ -5,26 +5,6 @@ $(document).ready(function(){
 			$('#msgcontent').html(ret);
 		})
 	});
-
-	$("#imgclick").click(function(){
-		var search_msg = $("#search_target").val();
-		$.get("/search/", {'search_msg' : search_msg}, function(ret){
-			$('#msgcontent').html(ret);
-		})
-	});
-
-	$('#circle').click(function(){
-		$(this).animate({width:'50px',
-						height:'50px'});
-	});
-	
-	$("#loopBtn").click(function(){
-		setInterval(function(){
-			$("#img").animate({width:"+=1px"});
-			
-			console.log($('#img').width());
-		}, 500);
-	});
 	
 	$("#searchVideo_btn").click(function(){
 		console.log("Click");
@@ -33,5 +13,36 @@ $(document).ready(function(){
 		$.get("/searchVideo/", {"videoID" : videoID}, function(ret){
 			
 		})
-	});	
+	});
+	
+	//From content extension by window listener
+	window.addEventListener('message', function(event){
+		
+		if (event.source != window) 
+			return;
+		
+		switch(event.data.type)
+		{
+			//get videoUrl response from extension [content]
+			case "FROM_EXTENSION_VIDEOURL":
+				console.log("FROM_EXTENSION_VIDEOURL URL = " + event.data.videoUrl);
+				
+				//send videoUrl to [view.py]
+				$.ajax({
+					type: "POST",
+					url: "/getVideoUrl/",
+					data: {
+						"videoUrl": event.data.videoUrl
+					},
+					success: function(response){
+						console.log("VideoUrl send done");
+						$("#scrText").text(response);
+						$('#videoSrc').attr('src', response);
+					}
+				});
+			break;
+		}
+	  },
+	  false
+	);
 });
