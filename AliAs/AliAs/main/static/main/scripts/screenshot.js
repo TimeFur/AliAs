@@ -35,26 +35,11 @@ $(document).ready(function(){
 			//get Screenshot response from extension [content]
 			case "FROM_EXTENSION":
 				console.log("Show Screenshot");
-				var imgSource = event.data.imgSrc;
 				
 				//crop image as video frame
-				imgSource = cropImage(event.data.imgSrc);
+				cropImage(event.data.imgSrc);
 				
-				//set to image src
-				insertImgSrc(id, imgSource, 0);
-				id = id + 1;
-				
-				//send to [view]
-				$.ajax({
-					type: "POST",
-					url: "/imgsrc/",
-					data: {
-						"imgSrc": imgSource
-					},
-					success: function(response){
-						
-					}
-				});
+				// sendImgSrc(event.data.imgSrc);
 			break;
 		}
 	  },
@@ -80,29 +65,43 @@ $(document).ready(function(){
 		var posY = videoSrcObject.position().top;
 		var videoWidth = videoSrcObject.width();
 		var videoHeight = videoSrcObject.height();
-		// var canvas = document.createElement('canvas');
-		var canvas = document.getElementById('canvas');
+		var canvas = document.createElement('canvas');
 		var ctx = canvas.getContext('2d');
-
+		var imgCanvasSrc;
+		
 		canvas.width = videoSrcObject.width();
 		canvas.height = videoSrcObject.height();
 		
 		img.src = src;
-		console.log("loading...");
 		img.onload = function(){
 			ctx.drawImage(	img, 
 							posX ,posY, 
 							videoWidth, videoHeight,
 							0 ,0, 
 							canvas.width, canvas.height);
-			src = canvas.toDataURL();
-			console.log("loading finish");
-		};
+			imgCanvasSrc = canvas.toDataURL();
 			
-		console.log("return src");
-		return src;
+			sendImgSrc(imgCanvasSrc);
+		};
 	}
 	
+	function sendImgSrc(imgSource){
+		//set to image src
+		insertImgSrc(id, imgSource, 0);
+		id = id + 1;
+		
+		//send to [view]
+		$.ajax({
+			type: "POST",
+			url: "/imgsrc/",
+			data: {
+				"imgSrc": imgSource
+			},
+			success: function(response){
+				
+			}
+		});
+	}
 	/*----------------------------------
 		Video Frame Scanning flow
 	----------------------------------*/
