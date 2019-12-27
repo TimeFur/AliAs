@@ -21,9 +21,9 @@ $(document).ready(function(){
 	});
 	
 	//mouse event
-	videoObject.mousemove(function(event){
-		console.log("Mouse event = " + event.pageX + ", " + event.pageY);
-	});
+	// videoObject.mousemove(function(event){
+		// console.log("Mouse event = " + event.pageX + ", " + event.pageY);
+	// });
 	
 	//window listener
 	window.addEventListener('message', function(event){
