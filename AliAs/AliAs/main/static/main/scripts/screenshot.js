@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var id = 0;
 	var imgArray = [];
 	var videoObject = $("#videoFrameId");
+	var videoSrcObject = $("#videoSrc");
 	var videoScanFrmObject = $("#videoScanFrmId");
 	
 	//Click listener
@@ -34,9 +35,13 @@ $(document).ready(function(){
 			//get Screenshot response from extension [content]
 			case "FROM_EXTENSION":
 				console.log("Show Screenshot");
+				var imgSource = event.data.imgSrc;
+				
+				//crop image as video frame
+				imgSource = cropImage(event.data.imgSrc);
 				
 				//set to image src
-				insertImgSrc(id, event.data.imgSrc, 0);
+				insertImgSrc(id, imgSource, 0);
 				id = id + 1;
 				
 				//send to [view]
@@ -44,7 +49,7 @@ $(document).ready(function(){
 					type: "POST",
 					url: "/imgsrc/",
 					data: {
-						"imgSrc": event.data.imgSrc
+						"imgSrc": imgSource
 					},
 					success: function(response){
 						
@@ -69,6 +74,34 @@ $(document).ready(function(){
 		$('#imgList').append(insertImgHtml);	
 	}
 	
+	function cropImage(src){
+		var img = new Image;
+		var posX = videoSrcObject.position().left;
+		var posY = videoSrcObject.position().top;
+		var videoWidth = videoSrcObject.width();
+		var videoHeight = videoSrcObject.height();
+		// var canvas = document.createElement('canvas');
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		canvas.width = videoSrcObject.width();
+		canvas.height = videoSrcObject.height();
+		
+		img.src = src;
+		console.log("loading...");
+		img.onload = function(){
+			ctx.drawImage(	img, 
+							posX ,posY, 
+							videoWidth, videoHeight,
+							0 ,0, 
+							canvas.width, canvas.height);
+			src = canvas.toDataURL();
+			console.log("loading finish");
+		};
+			
+		console.log("return src");
+		return src;
+	}
 	
 	/*----------------------------------
 		Video Frame Scanning flow
