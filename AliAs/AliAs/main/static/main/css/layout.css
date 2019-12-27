@@ -125,7 +125,13 @@ body{
 	width: 100%; 
 	pointer-events: auto
 }
-
+.videoScanFrmClass{
+	position: absolute;
+	border:3px;
+	background-color: #92a8d1;
+	z-index: 2;
+	border-style: dotted;
+}
 /*imgList css*/
 .imgListClass{
 	height: 20%; 

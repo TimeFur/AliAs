@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var id = 0;
 	var imgArray = [];
 	var videoObject = $("#videoFrameId");
+	var videoScanFrmObject = $("#videoScanFrmId");
 	
 	//Click listener
 	$("#screenshot_id").click(function(){
@@ -20,10 +21,7 @@ $(document).ready(function(){
 		// document.getElementById('popupImgForm').style.display = "block";
 	});
 	
-	//mouse event
-	// videoObject.mousemove(function(event){
-		// console.log("Mouse event = " + event.pageX + ", " + event.pageY);
-	// });
+	// videoFrameMouseListen();
 	
 	//window listener
 	window.addEventListener('message', function(event){
@@ -70,4 +68,75 @@ $(document).ready(function(){
 		
 		$('#imgList').append(insertImgHtml);	
 	}
+	
+	
+	/*----------------------------------
+		Video Frame Scanning flow
+	----------------------------------*/
+	function videoFrameMouseListen(){
+		var cur_width;
+		var cur_height;
+		var targetWidth = 50;
+		var detectFlag = 0;
+		var mousePosX = -1;
+		var mousePosY = -1;
+		var scanTime = 10;
+		
+		//set interval to scan
+		setInterval(function(){
+			cur_left = videoScanFrmObject.position().left;
+			cur_top = videoScanFrmObject.position().top;
+			
+			if (detectFlag < 3){	
+				videoScanFrmObject.css('width', $("#videoFrameId").width() / 50);
+				videoScanFrmObject.css('height', $("#videoFrameId").height());
+				videoScanFrmObject.css("top", $("#videoFrameId").position().top);
+				
+				//Scan frame
+				if (cur_left < $("#videoFrameId").width() - videoScanFrmObject.width())
+					cur_left = cur_left + videoScanFrmObject.width();
+				else
+					cur_left = $("#videoFrameId").position().left;
+				videoScanFrmObject.css("left", cur_left);
+			}else{
+				videoScanFrmObject.css('width', targetWidth);
+				videoScanFrmObject.css('height', targetWidth);
+				videoScanFrmObject.css("left", mousePosX);
+				videoScanFrmObject.css("top", mousePosY);
+			}
+		}, scanTime);
+		
+		//check the position
+		videoScanFrmObject.mouseout(function(event){
+			if (mousePosX != event.pageX && mousePosY != event.pageY)
+			{
+				mousePosX = event.pageX;
+				mousePosY = event.pageY;
+				detectFlag = 1;
+			}
+			else if (detectFlag < 10)
+			{
+				detectFlag += 1;
+			}
+			
+			console.log("video scan mouse mouseout = " + event.pageX + ", " + event.pageY);
+		});
+		//mouse event
+		videoScanFrmObject.mousemove(function(event){
+			console.log("Mouse move event = " + event.pageX + ", " + event.pageY);
+		});
+		videoScanFrmObject.mousemove(function(event){
+			console.log("Mouse move event = " + event.pageX + ", " + event.pageY);
+		});
+
+		videoScanFrmObject.mousedown(function(event){
+			console.log("Mouse Down = " + event.pageX + ", " + event.pageY);
+			// $('#videoSrc').css('pointer-events', 'auto');
+		});
+		videoScanFrmObject.mouseup(function(event){
+			console.log("Mouse Up = " + event.pageX + ", " + event.pageY);
+			// $('#videoSrc').css('pointer-events', 'none');
+		});
+	}
+
 });
