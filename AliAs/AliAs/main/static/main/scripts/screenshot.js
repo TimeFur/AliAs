@@ -49,7 +49,8 @@ $(document).ready(function(){
 	function insertImgSrc(id, imgSrc, videoTime){
 		var img_id = "imgList_item" + id;
 		var imgDict = {};	
-		var insertImgHtml = '<img id="' + img_id + '" src="' + imgSrc + '" width = 100 height = 100 />'
+		var insertImgHtml = '<img id="' + img_id + '" src="' + imgSrc + '" ' 
+							+ 'style="width: 10%; height: auto; margin-right:1%; margin-top:2%;" />'
 		
 		imgDict['id'] = img_id;
 		imgDict['imgSrc'] = imgSrc;

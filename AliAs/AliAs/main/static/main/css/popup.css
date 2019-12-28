@@ -7,7 +7,12 @@
 	height: 35%; 
 	padding: 20px; 
 	#border: 2px solid orange;
-	background-color: white; 
+	background-color: rgba(255,255,255,.8);
 	z-index:1002; 
 	overflow: auto; #using scroll
+}
+
+.popuprow {
+	height: 80%;
+	margin-bottom: -5%;
 }

@@ -67,6 +67,19 @@ def get_imgSrc(request):
     return HttpResponse(status)
 
 @csrf_exempt
+def imgSearch(request):
+    status = "None"
+
+    if POST_IMG_SRC_KEY in request.POST:
+        status = "Get imgSearch!"
+        
+        img_data = request.POST[POST_IMG_SRC_KEY]
+        
+        print ("imgSearch get!! ")
+        
+    return HttpResponse(status)
+
+@csrf_exempt
 def get_VideoUrl(request):
     videoUrl = "https://www.youtube.com/embed/"
     

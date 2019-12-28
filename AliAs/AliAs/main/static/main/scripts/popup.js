@@ -3,6 +3,29 @@ $(document).ready(function(){
 	var popupHoverFlag = false;
 	var hoverFlag = false;
 	var hiddenTime = 125;
+	var popupImgObj = document.getElementById("popImgId");
+	var popupSearchObj = $('#btn_popImgSearch');
+	var popupDelObj = $('#btn_popImgDel');
+	
+	//Popup Click event
+	popupSearchObj.click(function(){
+		popupImgObj = document.getElementById("popImgId");
+		imgSrc = popupImgObj['src'];
+		
+		//send imgSrc to [view]
+		$.ajax({
+			type: "POST",
+			url: "/imgsearch/",
+			data: {
+				"imgSrc": imgSrc
+			},
+			success: function(response){
+				console.log(response);
+			}
+		});
+		
+		// console.log(popupImgObj);
+	});
 	
 	//Hover event
 	$('#imgList').hover(function(){
