@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	
 	var id = 0;
+	var keyCode_S = 83;
 	var imgArray = [];
 	var videoObject = $("#videoFrameId");
 	var videoSrcObject = $("#videoSrc");
@@ -16,6 +17,20 @@ $(document).ready(function(){
 		
 		//send to extension [content]
 		window.postMessage(data, "*");
+	});
+	
+	$(document).bind('keydown', function (evt){
+		// if (event.keyCode == keyCode_S){
+			// var data = { 
+				// type: "FROM_PAGE", 
+				// text: "Screen Shot!" 
+			// };
+			// console.log("Click Screenshot");
+			
+			// window.postMessage(data, "*");
+		// }
+		
+		// console.log(event.keyCode);
 	});
 	
 	$("#btn0_id").click(function(){
@@ -49,7 +64,8 @@ $(document).ready(function(){
 	function insertImgSrc(id, imgSrc, videoTime){
 		var img_id = "imgList_item" + id;
 		var imgDict = {};	
-		var insertImgHtml = '<img id="' + img_id + '" src="' + imgSrc + '" ' 
+		var insertImgHtml = '<img id="' + img_id + '" src="' + imgSrc + '" '
+							+ 'col-text=" " '
 							+ 'style="width: 10%; height: auto; margin-right:1%; margin-top:2%;" />'
 		
 		imgDict['id'] = img_id;

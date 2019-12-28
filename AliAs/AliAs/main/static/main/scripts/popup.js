@@ -38,6 +38,18 @@ $(document).ready(function(){
 		console.log("Del imgId = " + delId);
 	});
 	
+	//save text
+	$("#popupText").keyup(function(event){
+		var text = $('#popupText').val();
+		var imgId = popupImgObj['name'];
+		
+		$('#' + imgId).attr('col-text', text);
+		// $('#popupText').attr('col-text')
+		
+		
+		console.log('#' + imgId + " = " + text);
+	});
+	
 	//Hover event
 	$('#imgList').hover(function(){
 		console.log("handler in");
@@ -100,9 +112,12 @@ $(document).ready(function(){
 		{
 			document.getElementById('popImgId').src = imgInfo['src'];
 			document.getElementById('popImgId').name = imgInfo['id'];
+			$('#popupText').val($('#' + imgInfo['id']).attr('col-text'));
 			popupObject.style.left = posX;
 			popupObject.style.top = posY;
 			popupObject.style.display = "block";
+			
+			// console.log("POPUP text = " + $('#' + imgInfo['id']).attr('col-text'));
 		}
 		else if(cmd == "HIDDEN")
 		{
