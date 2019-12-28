@@ -27,6 +27,17 @@ $(document).ready(function(){
 		// console.log(popupImgObj);
 	});
 	
+	popupDelObj.click(function(){
+		var delId;
+		
+		popupImgObj = document.getElementById("popImgId");
+		
+		delId = popupImgObj['name'];
+		document.getElementById(delId).remove();
+		
+		console.log("Del imgId = " + delId);
+	});
+	
 	//Hover event
 	$('#imgList').hover(function(){
 		console.log("handler in");
@@ -88,6 +99,7 @@ $(document).ready(function(){
 		if (cmd == "POPUP")
 		{
 			document.getElementById('popImgId').src = imgInfo['src'];
+			document.getElementById('popImgId').name = imgInfo['id'];
 			popupObject.style.left = posX;
 			popupObject.style.top = posY;
 			popupObject.style.display = "block";
