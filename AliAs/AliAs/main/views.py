@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import base64
+import os
 # Create your views here.
 
 POST_IMG_SRC_KEY = "imgSrc"
@@ -12,7 +13,7 @@ def main_page(request):
     html_dict = {'title':'AliAs'}
     
     return render(request,
-                   'main/main_page.html',
+                   'main_page.html',
                    html_dict)
 
 def search_page(request):
