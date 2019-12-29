@@ -78,16 +78,16 @@ $(document).ready(function(){
 	
 	function cropImage(src){
 		var img = new Image;
-		var posX = videoSrcObject.position().left;
-		var posY = videoSrcObject.position().top;
-		var videoWidth = videoSrcObject.width();
-		var videoHeight = videoSrcObject.height();
+		var posX = videoObject.position().left;
+		var posY = videoObject.position().top;
+		var videoWidth = videoObject.width();
+		var videoHeight = videoObject.height();
 		var canvas = document.createElement('canvas');
 		var ctx = canvas.getContext('2d');
 		var imgCanvasSrc;
 		
-		canvas.width = videoSrcObject.width();
-		canvas.height = videoSrcObject.height();
+		canvas.width = videoObject.width();
+		canvas.height = videoObject.height();
 		
 		img.src = src;
 		img.onload = function(){
