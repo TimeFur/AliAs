@@ -1,9 +1,10 @@
 $(document).ready(function(){
 	$("#search_btn").click(function(){
-		var search_msg = $("#search_target").val();
-		$.get("/search/", {'search_msg' : search_msg}, function(ret){
-			$('#msgcontent').html(ret);
-		})
+		sendSearchText();
+	});
+	$("#searchID").keyup(function(event){
+		if (event.keyCode == 13)
+			sendSearchText();
 	});
 	
 	$("#searchVideo_btn").click(function(){
@@ -45,4 +46,11 @@ $(document).ready(function(){
 	  },
 	  false
 	);
+	
+	function sendSearchText(){
+		var search_msg = $("#searchID").val();
+		$.get("/search/", {'search_msg' : search_msg}, function(ret){
+			// $('#msgcontent').html(ret);
+		})
+	}
 });
