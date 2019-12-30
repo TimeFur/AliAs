@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import base64
 import os
+
+from .static.main.alg import translation
 # Create your views here.
 
 POST_IMG_SRC_KEY = "imgSrc"
@@ -19,22 +21,17 @@ def main_page(request):
 def search_page(request):
     html_dict = {'title':'AliAs'}
     search_target = ""
-    #get search text
+    resultTrans = ""
     
     if 'search_msg' in request.GET:
         search_target = request.GET['search_msg'] #get 'name'
-    print ("search target = " + search_target)
-    
-    #get search result
-    #decorate view
-    #return HttpResponse(search_target)
-    return HttpResponse(search_target)
-    '''
-    return render(request,
-                   'main/main_page.html',
-                   html_dict
-                   )
-    '''
+
+    #call translation script
+    resultTrans = translation.translationFunc(search_target)
+
+    print ("Trans result = " + resultTrans)
+    return HttpResponse(resultTrans)
+
 def searchVideo_page(request):
 
     videoId = "None"

@@ -50,7 +50,7 @@ $(document).ready(function(){
 	function sendSearchText(){
 		var search_msg = $("#searchID").val();
 		$.get("/search/", {'search_msg' : search_msg}, function(ret){
-			// $('#msgcontent').html(ret);
+			$('#searchInfoId').html(ret);
 		})
 	}
 });
