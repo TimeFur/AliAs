@@ -40,7 +40,8 @@ $(document).ready(function(){
 						
 						//set url to playercontrol script
 						$("#scrText").text(response);
-						$('#videoSrc').attr('src', response);
+						window.ytrFirstUrlId(response);
+						// $('#videoSrc').attr('src', response);
 					}
 				});
 			break;

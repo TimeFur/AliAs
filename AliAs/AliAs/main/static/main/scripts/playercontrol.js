@@ -1,5 +1,13 @@
-
 var player = null;
+var readyUrlId = "";
+
+$(document).ready(function(){
+	$("#btn0_id").click(function(event){
+		if (player != null){
+			console.log("Player current time = " + player.getCurrentTime());
+		}
+	});
+});
 
 //when loading ytAPI done, then call follow function
 function onYouTubeIframeAPIReady() {
@@ -16,18 +24,26 @@ function onYouTubeIframeAPIReady() {
 			'onStateChange': stateChange
 		}
 	});
-
-	console.log("Youtube api get!!!");
 }
 
-function setVideoId(url){
+window.ytrFirstUrlId = function(url){
+	urlArray = url.split('/');
+	urlLength = url.split('/').length;
+	readyUrlId = urlArray[urlLength - 1];
+	
+	console.log("Get first urlId = " + urlArray[urlLength - 1]);
+}
+
+function setVideoId(urlId){
 	if (player != null){
-		player.cueVideoById(url, 0, 'large');	
+		player.cueVideoById(urlId, 0, 'large');	
 	}
 }
 
 function initialize(event){
-	player.cueVideoById('SJl1AV9uQbA', 0, 'large');	
+	if (readyUrlId != "")
+		player.cueVideoById(readyUrlId, 0, 'large');
+	console.log("Get init urlId = " + readyUrlId);	
 }
 
 function stateChange(event){
