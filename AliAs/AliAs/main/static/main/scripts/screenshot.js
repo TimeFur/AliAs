@@ -64,7 +64,9 @@ $(document).ready(function(){
 	function insertImgSrc(id, imgSrc, videoTime){
 		var img_id = "imgList_item" + id;
 		var imgDict = {};	
-		var insertImgHtml = '<img id="' + img_id + '" src="' + imgSrc + '" '
+		var insertImgHtml = '<img id="' + img_id 
+							+ '" src="' + imgSrc + '" '
+							+ 'currentTime="' + videoTime + '" '
 							+ 'col-text=" " '
 							+ 'style="width: 10%; height: auto; margin-right:1%; margin-top:2%;" />'
 		
@@ -103,8 +105,12 @@ $(document).ready(function(){
 	}
 	
 	function sendImgSrc(imgSource){
+		
+		//getCurrentTime
+		var videoTime = window.getYTCurrentTime();
+		
 		//set to image src
-		insertImgSrc(id, imgSource, 0);
+		insertImgSrc(id, imgSource, videoTime);
 		id = id + 1;
 		
 		//send to [view]

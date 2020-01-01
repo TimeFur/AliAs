@@ -9,6 +9,8 @@ $(document).ready(function(){
 	});
 });
 
+
+
 //when loading ytAPI done, then call follow function
 function onYouTubeIframeAPIReady() {
 	player = new YT.Player('videoSrc', {
@@ -26,6 +28,11 @@ function onYouTubeIframeAPIReady() {
 	});
 }
 
+window.getYTCurrentTime = function(){
+	if (player != null)
+		return player.getCurrentTime();
+	return 0;
+}
 window.ytrFirstUrlId = function(url){
 	urlArray = url.split('/');
 	urlLength = url.split('/').length;
