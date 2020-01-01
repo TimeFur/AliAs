@@ -64,7 +64,9 @@ $(document).ready(function(){
 	function insertImgSrc(id, imgSrc, videoTime){
 		var img_id = "imgList_item" + id;
 		var imgDict = {};	
-		var insertImgHtml = '<img id="' + img_id + '" src="' + imgSrc + '" '
+		var insertImgHtml = '<img id="' + img_id 
+							+ '" src="' + imgSrc + '" '
+							+ 'currentTime="' + videoTime + '" '
 							+ 'col-text=" " '
 							+ 'style="width: 10%; height: auto; margin-right:1%; margin-top:2%;" />'
 		
@@ -78,16 +80,16 @@ $(document).ready(function(){
 	
 	function cropImage(src){
 		var img = new Image;
-		var posX = videoSrcObject.position().left;
-		var posY = videoSrcObject.position().top;
-		var videoWidth = videoSrcObject.width();
-		var videoHeight = videoSrcObject.height();
+		var posX = videoObject.position().left;
+		var posY = videoObject.position().top;
+		var videoWidth = videoObject.width();
+		var videoHeight = videoObject.height();
 		var canvas = document.createElement('canvas');
 		var ctx = canvas.getContext('2d');
 		var imgCanvasSrc;
 		
-		canvas.width = videoSrcObject.width();
-		canvas.height = videoSrcObject.height();
+		canvas.width = videoObject.width();
+		canvas.height = videoObject.height();
 		
 		img.src = src;
 		img.onload = function(){
@@ -103,8 +105,12 @@ $(document).ready(function(){
 	}
 	
 	function sendImgSrc(imgSource){
+		
+		//getCurrentTime
+		var videoTime = window.getYTCurrentTime();
+		
 		//set to image src
-		insertImgSrc(id, imgSource, 0);
+		insertImgSrc(id, imgSource, videoTime);
 		id = id + 1;
 		
 		//send to [view]

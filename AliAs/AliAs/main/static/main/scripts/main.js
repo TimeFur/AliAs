@@ -36,9 +36,12 @@ $(document).ready(function(){
 						"videoUrl": event.data.videoUrl
 					},
 					success: function(response){
-						console.log("VideoUrl send done");
+						console.log("VideoUrl send done = " + response);
+						
+						//set url to playercontrol script
 						$("#scrText").text(response);
-						$('#videoSrc').attr('src', response);
+						window.ytrFirstUrlId(response);
+						// $('#videoSrc').attr('src', response);
 					}
 				});
 			break;
