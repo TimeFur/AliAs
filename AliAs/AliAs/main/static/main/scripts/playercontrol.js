@@ -28,6 +28,12 @@ function onYouTubeIframeAPIReady() {
 	});
 }
 
+window.setYTPLayCurrentTime = function(time){
+	if (player != null){
+		player.seekTo(time);
+	}
+}
+
 window.getYTCurrentTime = function(){
 	if (player != null)
 		return player.getCurrentTime();

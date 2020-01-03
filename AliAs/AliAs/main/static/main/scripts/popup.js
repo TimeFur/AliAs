@@ -58,17 +58,28 @@ $(document).ready(function(){
 		//loop imgList item & bind hover event
 		var children = document.getElementById('imgList').children;
 		$.each(children, function(index, value){
+			var imgId = '#' + value['id'];
 			
-			$('#' + value['id']).hover(function(event){
+			//Hover function
+			$(imgId).hover(function(event){
 				
 				console.log("X: " + event.pageX + ",Y: " + event.pageY);
 				
 				//show popup form
-				
 				popFormSwitch("POPUP", value, event);
 			}, function(event){
 				hiddenPopupForm(hiddenTime);
-			});	
+			});
+			
+			//Click event
+			$(imgId).click(function(event){
+				var time = $(imgId).attr('currentTime');
+				
+				console.log($(imgId).attr('currentTime'));
+				
+				//play video in this time
+				window.setYTPLayCurrentTime(time);
+			})
 		});
 		
 	}, 	function(){
