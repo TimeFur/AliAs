@@ -52,8 +52,16 @@ $(document).ready(function(){
 	
 	function sendSearchText(){
 		var search_msg = $("#searchID").val();
+		var searchHTML = '<font size="5" color="orange">' + search_msg + ':' + '</font>';
+		var retHTML = '';
+		var resultHTML;
+		
 		$.get("/search/", {'search_msg' : search_msg}, function(ret){
-			$('#searchInfoId').html(ret);
+			if (ret != ""){
+				retHTML = '<font size="3">' + ret + '</font>';
+				resultHTML = searchHTML + retHTML;
+				$('#searchInfoId').append(resultHTML);
+			}
 		})
 	}
 });
