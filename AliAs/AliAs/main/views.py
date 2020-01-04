@@ -27,9 +27,10 @@ def search_page(request):
         search_target = request.GET['search_msg'] #get 'name'
 
     #call translation script
-    resultTrans = translation.translationFunc(search_target)
-
+    tranObj = translation.Translation('CAMBRIDGE').getTrans()
+    resultTrans = tranObj(search_target)
     print ("Trans result = " + resultTrans)
+    
     return HttpResponse(resultTrans)
 
 def searchVideo_page(request):
