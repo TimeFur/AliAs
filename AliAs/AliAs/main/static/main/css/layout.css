@@ -75,7 +75,10 @@ body{
 
 /*CONTENT section*/
 .mainViewStyle{
-	background-color:#00FFFF;
+	#background-color:#00FFFF;
+	background: url('../element/bg4.jpg');
+	background-repeat: no-repeat;
+	background-size:100% 100%;
 }
 
 .flex-fill {
@@ -134,11 +137,11 @@ body{
 }
 /*imgList css*/
 .imgListClass{
-	height: 20%; 
+	height: 19%; 
 	border-top: 5px solid grey; 
 	margin-right: -20px; 
 	margin-left: -20px; 
-	overflow-y: hidden; 
-	overflow: auto; 
-	white-space: nowrap;"
+	overflow-y: hidden;
+	overflow: hidden;
+	white-space: nowrap;
 }

@@ -115,7 +115,7 @@ $(document).ready(function(){
 		if (event != null && imgInfo != null)
 		{
 			posX = ($('#' + imgInfo['id']).position().left + $('#' + imgInfo['id']).width()) + 'px';
-			posY = ($('#' + imgInfo['id']).position().top - $('#popupImgForm').height()) + 'px';
+			posY = ($('#screenshotList').position().top - $('#popupImgForm').height()) + 'px';
 		}
 		
 		console.log("imgList posX = " + posX + ", posY = "+ posY);

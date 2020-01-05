@@ -65,8 +65,19 @@
 				</div>
 				
 				<!--Collection-->
-				<div id="imgList" class="imgListClass">
+				<div id="screenshotList" class="imgListClass">
+					<div class="row" style='height: 100%;'>
+						<div class="col-sm-10" 
+							 style=' border-style:solid; overflow:auto;'>
+							<div id = 'imgList'></div>
+						</div>
+						<div class="col-sm-2">
+							<input id="screenshot_id" type="button" value="screenshot"/>
+							<input id="editId" type="button" value="Edit"/>
+						</div>
+					</div>
 				</div>
+				
 				<!--POP form-->					
 				{% include 'popup.html' %}
 			</div> <!--end of Video leftBar-->
@@ -88,10 +99,7 @@
 				
 				<!--Test bar-->
 				<div style="height: 10%;">
-					<input id="screenshot_id" type="button" value="screenshot"/>
 					<input id="btn0_id" type="button" value="Btn_0"/>
-					
-					
 					<li id="scrText"></li>
 				</div>
 				
