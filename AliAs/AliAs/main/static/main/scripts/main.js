@@ -16,6 +16,21 @@ $(document).ready(function(){
 		})
 	});
 	
+	$('#btn0_id').click(function(){
+		var url = $('#videoFrameId').attr('videourl');
+				
+		//send videoUrl to [view.py]
+		$.ajax({
+			type: "POST",
+			url: "/downloadVideo/",
+			data: {
+				"videoUrl": url
+			},
+			success: function(response){
+				
+			}
+		});
+	});
 	//From content extension by window listener
 	window.addEventListener('message', function(event){
 		
@@ -27,6 +42,7 @@ $(document).ready(function(){
 			//get videoUrl response from extension [content]
 			case "FROM_EXTENSION_VIDEOURL":
 				console.log("FROM_EXTENSION_VIDEOURL URL = " + event.data.videoUrl);
+				$('#videoFrameId').attr('videourl', event.data.videoUrl);
 				
 				//send videoUrl to [view.py]
 				$.ajax({

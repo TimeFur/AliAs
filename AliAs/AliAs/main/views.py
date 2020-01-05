@@ -5,6 +5,7 @@ import base64
 import os
 
 from .static.main.alg import translation
+from .static.main.alg import videodownload
 # Create your views here.
 
 POST_IMG_SRC_KEY = "imgSrc"
@@ -43,6 +44,18 @@ def searchVideo_page(request):
     print (videoId)
 
     return HttpResponse(search_target)
+
+@csrf_exempt
+def videoDownload(request):
+    url = ''
+    if POST_VIDEOURL_SRC_KEY in request.POST:
+        url = request.POST[POST_VIDEOURL_SRC_KEY]
+
+        print ("Download url  = " + url)
+        videoObj = videodownload.DownloadObj()
+        videoObj.download(url)
+        
+    return HttpResponse("OK")
 
 @csrf_exempt
 def get_imgSrc(request):
