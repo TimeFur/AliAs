@@ -8,7 +8,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from app import forms, views
 
-import main.views as main_views
+import main.views as mainViews
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -28,12 +28,14 @@ urlpatterns = [
          name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
-    
-    path('alias/', main_views.main_page),
-    path('search/', main_views.search_page),
-    path('searchVideo/', main_views.searchVideo_page),
-    path('imgsrc/', main_views.get_imgSrc),
-    path('imgsearch/', main_views.imgSearch),
-    path('getVideoUrl/', main_views.get_VideoUrl),
-    path('downloadVideo/', main_views.videoDownload),
+
+    #mainViews get/post request
+    path('alias/', mainViews.main_page),
+    path('search/', mainViews.search_page),
+    path('searchVideo/', mainViews.searchVideo_page),
+    path('imgsrc/', mainViews.get_imgSrc),
+    path('imgsearch/', mainViews.imgSearch),
+    path('getVideoUrl/', mainViews.get_VideoUrl),
+    path('downloadVideo/', mainViews.videoDownload),
+    path('editPage/', mainViews.changeToEdit, name="EditPage"),
 ]

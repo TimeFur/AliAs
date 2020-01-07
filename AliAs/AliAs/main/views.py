@@ -45,6 +45,15 @@ def searchVideo_page(request):
 
     return HttpResponse(search_target)
 
+def changeToEdit(request):
+    html_dict = {'title':'Edit'}
+    print (request.GET)
+
+    
+    return render(request,
+                   'editPage.html',
+                   html_dict)
+
 @csrf_exempt
 def videoDownload(request):
     url = ''

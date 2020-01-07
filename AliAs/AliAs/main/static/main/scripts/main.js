@@ -17,19 +17,22 @@ $(document).ready(function(){
 	});
 	
 	$('#btn0_id').click(function(){
-		var url = $('#videoFrameId').attr('videourl');
-				
-		//send videoUrl to [view.py]
-		$.ajax({
-			type: "POST",
-			url: "/downloadVideo/",
-			data: {
-				"videoUrl": url
-			},
-			success: function(response){
-				
-			}
-		});
+		
+	});
+	
+	$('#editId').click(function(){
+		var urlhref = '/editPage';
+		
+		var videoID = $("#videoFrameId").attr('videourl');
+		var getDict = 'videoUrl =' + videoID;
+		var imgList = $('#imgList');
+		
+		//Set imgList data to Database
+		// console.log(imgList.html);
+		
+		
+		
+		location.replace(urlhref + '?' + getDict);
 	});
 	//From content extension by window listener
 	window.addEventListener('message', function(event){
@@ -79,5 +82,21 @@ $(document).ready(function(){
 				$('#searchInfoId').append(resultHTML);
 			}
 		})
+	}
+	
+	function downloadVideo(){
+		var url = $('#videoFrameId').attr('videourl');
+				
+		//send videoUrl to [view.py]
+		$.ajax({
+			type: "POST",
+			url: "/downloadVideo/",
+			data: {
+				"videoUrl": url
+			},
+			success: function(response){
+				
+			}
+		});
 	}
 });

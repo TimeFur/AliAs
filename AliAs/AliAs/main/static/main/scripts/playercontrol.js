@@ -1,16 +1,6 @@
 var player = null;
 var readyUrlId = "";
 
-$(document).ready(function(){
-	$("#btn0_id").click(function(event){
-		if (player != null){
-			console.log("Player current time = " + player.getCurrentTime());
-		}
-	});
-});
-
-
-
 //when loading ytAPI done, then call follow function
 function onYouTubeIframeAPIReady() {
 	player = new YT.Player('videoSrc', {
