@@ -6,6 +6,7 @@ import os
 
 from .static.main.alg import translation
 from .static.main.alg import videodownload
+from .static.main.alg import videoInfoParse
 # Create your views here.
 
 POST_IMG_SRC_KEY = "imgSrc"
@@ -47,8 +48,13 @@ def searchVideo_page(request):
 
 def changeToEdit(request):
     html_dict = {'title':'Edit'}
-    print (request.GET)
+    
+    if POST_VIDEOURL_SRC_KEY in request.GET:
+        url = request.GET[POST_VIDEOURL_SRC_KEY]
+        videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser()
+        videoInfo = videoObj(url)
 
+        print (videoInfo)
     
     return render(request,
                    'editPage.html',

@@ -24,7 +24,7 @@ $(document).ready(function(){
 		var urlhref = '/editPage';
 		
 		var videoID = $("#videoFrameId").attr('videourl');
-		var getDict = 'videoUrl =' + videoID;
+		var getDict = 'videoUrl=' + videoID;
 		var imgList = $('#imgList');
 		
 		//Set imgList data to Database
