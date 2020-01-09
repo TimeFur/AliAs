@@ -46,16 +46,14 @@ $(document).ready(function(){
 		//Set imgList data to Database
 		$.ajax({
 			type: "POST",
-			url: "/editPage/",
+			url: "/editInfo/",
 			data: {
 				postArray
 			},
 			success: function(response){
-				
+				location.replace(urlhref);
 			}
 		});
-		
-		// location.replace(urlhref + '?' + getDict);
 	});
 	//From content extension by window listener
 	window.addEventListener('message', function(event){

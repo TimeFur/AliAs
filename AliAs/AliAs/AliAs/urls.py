@@ -37,5 +37,6 @@ urlpatterns = [
     path('imgsearch/', mainViews.imgSearch),
     path('getVideoUrl/', mainViews.get_VideoUrl),
     path('downloadVideo/', mainViews.videoDownload),
-    path('editPage/', mainViews.changeToEdit, name="EditPage"),
+    path('editPage/', mainViews.changeToEdit),
+    path('editInfo/', mainViews.sendToEditInfo),
 ]

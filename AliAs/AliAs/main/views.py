@@ -47,17 +47,24 @@ def searchVideo_page(request):
 
     return HttpResponse(search_target)
 
-@csrf_exempt
 def changeToEdit(request):
-    html_dict = {'title':'Edit'}
+    html_dict = {'title':'EditPage'}
+
+    #get img data from database
+        
+    return render(request,
+                   'editPage.html',
+                   html_dict)
+
+@csrf_exempt
+def sendToEditInfo(request):
 
     imgList = {}
     data = request.POST #QueryDict
     for item in data.lists():
         print (item)
-    return render(request,
-                   'editPage.html',
-                   html_dict)
+        
+    return HttpResponse("DONE")
 
 @csrf_exempt
 def videoDownload(request):
