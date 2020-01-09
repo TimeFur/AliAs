@@ -17,22 +17,45 @@ $(document).ready(function(){
 	});
 	
 	$('#btn0_id').click(function(){
-		
+		downloadVideo();
 	});
 	
 	$('#editId').click(function(){
 		var urlhref = '/editPage';
-		
 		var videoID = $("#videoFrameId").attr('videourl');
 		var getDict = 'videoUrl=' + videoID;
-		var imgList = $('#imgList');
+		var imgTag = document.getElementsByTagName('img');
+		var postArray = [];
+		var postImgItem = {};
+		
+		postImgItem['videoUrl'] = videoID;
+		postArray.push(postImgItem);
+		//get img element
+		for (var i = 0; i < imgTag.length; i++){
+			if (imgTag[i].getAttribute('id') != 'popImgId'){
+			
+				postImgItem = {};
+				postImgItem[imgTag[i].getAttribute('id')] = ['imgSrc', 
+															 imgTag[i].getAttribute('currenttime'),
+															 imgTag[i].getAttribute('col-text')];
+				postArray.push(postImgItem);
+			}
+		}
+		console.log(postArray);
 		
 		//Set imgList data to Database
-		// console.log(imgList.html);
+		$.ajax({
+			type: "POST",
+			url: "/editPage/",
+			data: {
+				postArray
+			},
+			success: function(response){
+				
+			}
+		});
 		
-		
-		
-		location.replace(urlhref + '?' + getDict);
+		// location.replace(urlhref + '?' + getDict);
 	});
 	//From content extension by window listener
 	window.addEventListener('message', function(event){

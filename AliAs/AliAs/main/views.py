@@ -11,6 +11,7 @@ from .static.main.alg import videoInfoParse
 
 POST_IMG_SRC_KEY = "imgSrc"
 POST_VIDEOURL_SRC_KEY = "videoUrl"
+POST_IMGDATA_KEY = 'IMGLIST_DATA'
 
 def main_page(request):
     print ("AliAs main access")
@@ -46,16 +47,14 @@ def searchVideo_page(request):
 
     return HttpResponse(search_target)
 
+@csrf_exempt
 def changeToEdit(request):
     html_dict = {'title':'Edit'}
-    
-    if POST_VIDEOURL_SRC_KEY in request.GET:
-        url = request.GET[POST_VIDEOURL_SRC_KEY]
-        videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser()
-        videoInfo = videoObj(url)
 
-        print (videoInfo)
-    
+    imgList = {}
+    data = request.POST #QueryDict
+    for item in data.lists():
+        print (item)
     return render(request,
                    'editPage.html',
                    html_dict)
