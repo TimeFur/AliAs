@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.template.loader import get_template
 import base64
 import os
 
@@ -47,14 +48,14 @@ def searchVideo_page(request):
 
     return HttpResponse(search_target)
 
-def changeToEdit(request):
-    html_dict = {'title':'EditPage'}
-
+def changeToEdit(request):    
+    title = 'EditPage~~~'
+    
     #get img data from database
-        
-    return render(request,
-                   'editPage.html',
-                   html_dict)
+    template = get_template('editPage.html')
+    html = template.render(locals())
+    
+    return HttpResponse(html)
 
 @csrf_exempt
 def sendToEditInfo(request):
