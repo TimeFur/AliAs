@@ -79,7 +79,6 @@ $(document).ready(function(){
 						console.log("VideoUrl send done = " + response);
 						
 						//set url to playercontrol script
-						$("#scrText").text(response);
 						window.ytrFirstUrlId(response);
 						// $('#videoSrc').attr('src', response);
 					}

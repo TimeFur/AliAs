@@ -145,3 +145,8 @@ body{
 	overflow: hidden;
 	white-space: nowrap;
 }
+
+.navbar-custom{
+	background-color: #9d7878;
+    border-color: #9d7878;
+}

@@ -38,26 +38,33 @@
 </head>
 
 <body>
-	<div class="container-fluid">
+	<nav class="navbar navbar-expand-lg navbar-custom mb-0">
+		<!-- Navbar brand -->
+		<h1 class="navbar-brand" href="#">
+			<img src="{% static 'main/element/icon_0.png' %}" style="height: 100%; width: auto;"  class="d-inline-block align-top"/>
+			Title
+		</h1>
+
+		<!-- Collapsible content -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<form class="form-inline ml-auto">
+				<div class="md-form my-0">
+					<input id="searchID" class="form-control mr-sm-2" style="width:500px" type="text" placeholder="Search" aria-label="Search">
+				</div>
+				<span id="search_btn" class="input-group-text purple lighten-3">
+					<i class="fas fa-search text-white" aria-hidden="true"></i>
+				</span>
+			</form>
+
+		</div>
+		<!-- Collapsible content -->
+	</nav>
 		
+	<div class="container-fluid">
 		<!--main view-->
 		<div class="row flex-fill mainViewStyle">
 			<!--Video Bar-->
 			<div class="col-sm-8">
-				<!--search video bar-->
-				<div style="height: 6%;">
-					<input 	id="searchVideoID"
-							class="searchVideo-textbar" 
-							type="text"
-							placeholder="Search Video..." 
-							name="search">
-					<button id="searchVideo_btn" 
-							type="button" 
-							class="btn-info searchVideo-btn">
-						<i class="fa fa-search"></i>
-					</button>
-				</div>
-				
 				<!--Video Player frame-->
 				<div id='videoFrameId' class="videoFrameClass" videourl = "">
 					<!--<div id="videoScanFrmId" class="videoScanFrmClass"></div>-->
@@ -72,8 +79,19 @@
 							<div id = 'imgList'></div>
 						</div>
 						<div class="col-sm-2">
-							<input id="screenshot_id" type="button" value="screenshot"/>
-							<input id="editId" type="button" value="Edit"/>
+							 <br>
+							 <button id="screenshot_id" type="button" class="btn btn-lg">
+								<i class="glyphicon glyphicon-picture"></i>
+								ScreenShot
+							 </button>
+							 </br>
+							 
+							 <br>
+							 <button id="editId" type="button" class="btn btn-lg btn-circle">
+								<i class="fa fa-edit"></i>
+								Edit
+							 </button>
+							 </br>
 						</div>
 					</div>
 				</div>
@@ -84,23 +102,9 @@
 			
 			<!--Search Bar-->
 			<div class="col-sm-4" style="border-left: 5px solid grey;">
-				<div style="height: 10%;">
-					<input 	id="searchID"
-							class="searchVideo-textbar" 
-							type="text"
-							placeholder="Search ..." 
-							name="search">
-					<button id="search_btn" 
-							type="button" 
-							class="btn-info searchVideo-btn">
-						<i class="fa fa-search"></i>
-					</button>
-				</div>
-				
 				<!--Test bar-->
 				<div style="height: 10%;">
 					<input id="btn0_id" type="button" value="Btn_0"/>
-					<li id="scrText"></li>
 				</div>
 				
 				<div id="searchInfoId" style="height: 80%;">
