@@ -80,16 +80,20 @@ $(document).ready(function(){
 	
 	function cropImage(src){
 		var img = new Image;
-		var posX = videoObject.position().left;
-		var posY = videoObject.position().top;
-		var videoWidth = videoObject.width();
-		var videoHeight = videoObject.height();
+		
+		var rect = document.getElementById('videoFrameId').getBoundingClientRect();
+		
+		var posX = rect.left;
+		var posY = rect.top;
+		var videoWidth = rect.right - rect.left;
+		var videoHeight = rect.bottom - rect.top;
+		
 		var canvas = document.createElement('canvas');
 		var ctx = canvas.getContext('2d');
 		var imgCanvasSrc;
 		
-		canvas.width = videoObject.width();
-		canvas.height = videoObject.height();
+		canvas.width = videoWidth;
+		canvas.height = videoHeight;
 		
 		img.src = src;
 		img.onload = function(){

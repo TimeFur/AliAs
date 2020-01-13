@@ -1,12 +1,12 @@
+var createUrl = "http://127.0.0.1:8000/alias/";
+var videoRequestUrl = "https://www.youtube.com";
+
 chrome.runtime.onInstalled.addListener(function(){
 	console.log("Alias extension");
 });
 
 //https://stackoverflow.com/questions/18794407/chrome-extension-api-chrome-tabs-capturevisibletab-on-background-page-to-conten
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-	
-	var createUrl = "http://127.0.0.1:8000/alias/";
-	
 	switch(request.type)
 	{
 		case "FROM_CONTENT_SCREENSHOT":
@@ -25,16 +25,15 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 			var curTabUrl = request.currentUrl;
 			var fromTabId = request.fromTabId;
 			
+			videoRequestUrl = request.currentUrl;
 			// open Alias website
 			chrome.tabs.create({'url': createUrl}, function(tabs){
 				
-				var msg = {
-					type: "TOGGLESELF_SEND_YTURL",
-					videoUrl: curTabUrl
-				}
-				
-				// setTimeout(function(){injectContentScript(tabs.id, msg)}, 2000);
-				injectContentScript(tabs.id, msg);
+				// var msg = {
+					// type: "TOGGLESELF_SEND_YTURL",
+					// videoUrl: curTabUrl
+				// }
+				// injectContentScript(tabs.id, msg);
 			});
 			
 			sendResponse('RESPONSE TO POPUP');
@@ -48,6 +47,23 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 	}
 	//allow sendResponse async, let captureVisibleTab sendReponse
 	return true;
+});
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    // make sure the status is 'complete' and it's the right tab
+    if (tab.url == createUrl && changeInfo.status == 'complete') {
+        
+		var msg = {
+					type: "TOGGLESELF_SEND_YTURL",
+					videoUrl: videoRequestUrl
+				}
+		injectContentScript(tab.id, msg);
+		
+		console.log("Website is already loaded done");
+		// chrome.tabs.executeScript(null, { 
+            // code: "alert('Hi');" 
+        // });
+    }
 });
 
 //https://www.bennettnotes.com/post/fix-receiving-end-does-not-exist/

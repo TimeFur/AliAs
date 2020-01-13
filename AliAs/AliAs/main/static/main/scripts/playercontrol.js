@@ -34,6 +34,8 @@ window.ytrFirstUrlId = function(url){
 	urlLength = url.split('/').length;
 	readyUrlId = urlArray[urlLength - 1];
 	
+	player.cueVideoById(readyUrlId, 0, 'large');
+	
 	console.log("Get first urlId = " + urlArray[urlLength - 1]);
 }
 
