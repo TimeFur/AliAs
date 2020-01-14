@@ -76,10 +76,9 @@ $(document).ready(function(){
 						"videoUrl": event.data.videoUrl
 					},
 					success: function(response){
-						console.log("VideoUrl send done = " + response);
-						
 						//set url to playercontrol script
-						window.ytrFirstUrlId(response);
+						window.ytrFirstUrlId(response['videoUrl']);
+						$('#videoTitle').text(response['videoTitle']);
 						// $('#videoSrc').attr('src', response);
 					}
 				});

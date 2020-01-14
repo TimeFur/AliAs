@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
 import base64
@@ -49,7 +50,7 @@ def searchVideo_page(request):
     return HttpResponse(search_target)
 
 def changeToEdit(request):    
-    title = 'EditPage~~~'
+    title = 'EditPage'
     
     #get img data from database
     template = get_template('editPage.html')
@@ -118,6 +119,8 @@ def get_VideoUrl(request):
     
     if POST_VIDEOURL_SRC_KEY in request.POST:
         url = request.POST[POST_VIDEOURL_SRC_KEY]
+
+        #setting youtube url as embed type
         start = url.find('v=') + 2
         end = -1
         if url.find('&') > 0:
@@ -126,5 +129,13 @@ def get_VideoUrl(request):
         else:
             videoUrl = videoUrl + url[start:]
         print (videoUrl)
+
+        #parsing title
+        videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser(url)
+        title = videoObj.getTitle()
+        print (title)
+
+        data ={'videoUrl': videoUrl,
+               'videoTitle': title}
         
-    return HttpResponse(videoUrl)
+    return JsonResponse(data)
