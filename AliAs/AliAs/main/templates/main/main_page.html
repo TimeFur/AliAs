@@ -37,38 +37,38 @@
 	<link rel="icon" href="{% static 'main/element/icon_0.png' %}" type="image/x-icon" />
 </head>
 
-<body>
-	<nav class="navbar navbar-expand-lg navbar-custom mb-0">
-		<!-- Navbar brand -->
-		<h1 class="navbar-brand" href="#">
-			<img src="{% static 'main/element/icon_0.png' %}" style="height: 100%; width: auto;"  class="d-inline-block align-top"/>
-			<h1 id="videoTitle"></h1>
-		</h1>
+<body>	
+	<div class="wrapper container-fluid">
+		<nav class="navbar navbar-expand-lg mb-0" style="margin-left: -15px; margin-right: -15px;">
+			<!-- Navbar brand -->
+			<h1 class="navbar-brand">
+				<img src="{% static 'main/element/icon_0.png' %}" style="height: 100%; width: auto;"  class="d-inline-block align-top"/>
+				<h1 id="videoTitle"></h1>
+			</h1>
 
-		<!-- Collapsible content -->
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<form class="form-inline ml-auto">
-				<div class="md-form my-0">
-					<input 	id="searchID" 
-							class="form-control mr-sm-2" style="width:500px; font-size: 25px;" 
-							type="text" 
-							placeholder="Search" 
-							aria-label="Search">
+			<!-- Collapsible content -->
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<div class="form-inline ml-auto">
+					<div class="md-form my-0">
+						<input 	id="searchID" 
+								class="form-control mr-sm-2" style="width:500px; font-size: 25px;" 
+								type="text" 
+								placeholder="Search" 
+								aria-label="Search">
+					</div>
+					<span id="search_btn" class="input-group-text purple lighten-3" style = 'font-size: 25px;'>
+						<i class="fas fa-search text-white" aria-hidden="true"></i>
+					</span>
 				</div>
-				<span id="search_btn" class="input-group-text purple lighten-3" style = 'font-size: 25px;'>
-					<i class="fas fa-search text-white" aria-hidden="true"></i>
-				</span>
-			</form>
 
-		</div>
-		<!-- Collapsible content -->
-	</nav>
-		
-	<div class="container-fluid">
+			</div>
+			<!-- Collapsible content -->
+		</nav>
+	
 		<!--main view-->
 		<div class="row flex-fill mainViewStyle">
 			<!--Video Bar-->
-			<div class="col-sm-8">
+			<div class="col-sm-8">		
 				<!--Video Player frame-->
 				<div id='videoFrameId' class="videoFrameClass" videourl = "">
 					<!--<div id="videoScanFrmId" class="videoScanFrmClass"></div>-->
@@ -118,5 +118,6 @@
 			</div> <!--end of mapView-->
 		</div> <!--end of main_view-->
 	</div> <!-- end of container-fluid -->
+
 </body>
 </html>
