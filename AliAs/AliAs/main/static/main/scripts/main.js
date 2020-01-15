@@ -95,11 +95,26 @@ $(document).ready(function(){
 		var resultHTML;
 		
 		$.get("/search/", {'search_msg' : search_msg}, function(ret){
-			if (ret != ""){
-				
-				searchHTML = '<font size="5" color="orange">' + search_msg + ':' + '</font>';
+			var appendFlag = true;
+			
+			//check whether search_msg is already exist or not
+			searchList = document.getElementById('searchInfoId');
+			if (searchList != null){
+				// console.log(searchList.childNodes.length);
+				for (var i = 0; i < searchList.childNodes.length; i++){
+					if (searchList.childNodes[i].childNodes[0] != null){
+						// console.log(searchList.childNodes[i].childNodes[0].id);
+						if (searchList.childNodes[i].childNodes[0].id == search_msg)
+							appendFlag = false;
+					}
+				}	
+			}
+			
+			//append text
+			if (ret != "" && appendFlag == true){	
+				searchHTML = '<font size="5" color="orange" id=' + search_msg + '>' + search_msg + ':' + '</font>';
 				retHTML = '<font size="3">' + ret + '</font>';
-				resultHTML = searchHTML + retHTML;
+				resultHTML = '<div id = "searchItemId">' + searchHTML + retHTML + '</div>';
 				
 				$('#searchInfoId').append(resultHTML);
 			}
