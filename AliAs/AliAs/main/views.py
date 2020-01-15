@@ -51,6 +51,10 @@ def searchVideo_page(request):
 
 def changeToEdit(request):    
     title = 'EditPage'
+
+    videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser("https://www.youtube.com/watch?v=6ZZX9iIgFoo")
+    videoTitle = videoObj.getTitle()
+    videoInfo = videoObj.getInfo()
     
     #get img data from database
     template = get_template('editPage.html')

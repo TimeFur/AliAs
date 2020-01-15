@@ -16,7 +16,7 @@ $(document).ready(function(){
 		})
 	});
 	
-	$('#btn0_id').click(function(){
+	$('#downloadVideoId').click(function(){
 		downloadVideo();
 	});
 	
@@ -90,14 +90,17 @@ $(document).ready(function(){
 	
 	function sendSearchText(){
 		var search_msg = $("#searchID").val();
-		var searchHTML = '<font size="5" color="orange">' + search_msg + ':' + '</font>';
+		var searchHTML;
 		var retHTML = '';
 		var resultHTML;
 		
 		$.get("/search/", {'search_msg' : search_msg}, function(ret){
 			if (ret != ""){
+				
+				searchHTML = '<font size="5" color="orange">' + search_msg + ':' + '</font>';
 				retHTML = '<font size="3">' + ret + '</font>';
 				resultHTML = searchHTML + retHTML;
+				
 				$('#searchInfoId').append(resultHTML);
 			}
 		})
