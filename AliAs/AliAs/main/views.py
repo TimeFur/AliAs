@@ -64,12 +64,11 @@ def changeToEdit(request):
 
 @csrf_exempt
 def sendToEditInfo(request):
-
+    print ("Send to edit page")
     imgList = {}
     data = request.POST #QueryDict
-    for item in data.lists():
-        print (item)
-        
+    print (data['videoUrl'])
+
     return HttpResponse("DONE")
 
 @csrf_exempt

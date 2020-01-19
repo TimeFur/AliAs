@@ -25,35 +25,35 @@ $(document).ready(function(){
 		var videoID = $("#videoFrameId").attr('videourl');
 		var getDict = 'videoUrl=' + videoID;
 		var imgTag = document.getElementsByTagName('img');
-		var postArray = [];
-		var postImgItem = {};
+		var postArray = {};
 		
-		postImgItem['videoUrl'] = videoID;
-		postArray.push(postImgItem);
+		var formData = new FormData();
+		formData.append('videoUrl', videoID);
 		//get img element
 		for (var i = 0; i < imgTag.length; i++){
-			if (imgTag[i].getAttribute('id') != 'popImgId'){
 			
-				postImgItem = {};
-				postImgItem[imgTag[i].getAttribute('id')] = ['imgSrc', 
-															 imgTag[i].getAttribute('currenttime'),
-															 imgTag[i].getAttribute('col-text')];
-				postArray.push(postImgItem);
+			if (imgTag[i].getAttribute('id') != null
+				&& imgTag[i].getAttribute('id') != 'popImgId'){
+				
+				var imgDict = JSON.stringify({	'src': imgTag[i].getAttribute('src'),
+												'currenttime': imgTag[i].getAttribute('currenttime'),
+												'text': imgTag[i].getAttribute('col-text')});
+				formData.append(imgTag[i].getAttribute('id'), 
+								imgDict);
 			}
 		}
-		console.log(postArray);
 		
-		//Set imgList data to Database
 		$.ajax({
-			type: "POST",
-			url: "/editInfo/",
-			data: {
-				postArray
-			},
-			success: function(response){
-				location.replace(urlhref);
-			}
-		});
+			url: '/editInfo/',
+			type: 'POST',
+			cache: false,
+			data: formData,
+			processData: false,
+			contentType: false
+		}).done(function(res) {
+			location.replace(urlhref);
+		}).fail(function(res) {});
+		
 	});
 	//From content extension by window listener
 	window.addEventListener('message', function(event){
