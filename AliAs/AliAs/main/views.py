@@ -4,8 +4,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
 import base64
-import os
-import json
+import os, json
+
+from .models import PostUrl, PostImgList
 
 from .static.main.alg import translation
 from .static.main.alg import videodownload
@@ -70,14 +71,16 @@ def sendToEditInfo(request):
     data = request.POST #QueryDict
 
     for key in request.POST:
-        imgObject = request.POST[key]
         if key != 'videoUrl':
+            imgObject = request.POST[key]
             imgObject = json.loads(request.POST[key])
-            print (key, imgObject['curtime'])
-            print (key, imgObject['text'])
-            #print (key, imgObject['src'])
+            PostImgList.objects.create(title = key,
+                                       content = imgObject['text'],
+                                       curtime = imgObject['curtime'],
+                                       imgsrc = imgObject['src'])
         else:
-            print (key, imgObject)
+            urlObject = request.POST[key]
+            PostUrl.objects.create(url = urlObject)
 
     return HttpResponse("DONE")
 
