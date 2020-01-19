@@ -28,7 +28,7 @@ $(document).ready(function(){
 		var postArray = {};
 		
 		var formData = new FormData();
-		formData.append('videoUrl', videoID);
+		
 		//get img element
 		for (var i = 0; i < imgTag.length; i++){
 			
@@ -36,13 +36,26 @@ $(document).ready(function(){
 				&& imgTag[i].getAttribute('id') != 'popImgId'){
 				
 				var imgDict = JSON.stringify({	'src': imgTag[i].getAttribute('src'),
-												'currenttime': imgTag[i].getAttribute('currenttime'),
+												'curtime': imgTag[i].getAttribute('currenttime'),
 												'text': imgTag[i].getAttribute('col-text')});
 				formData.append(imgTag[i].getAttribute('id'), 
 								imgDict);
+								
+				$.ajax({
+					url: '/editInfo/',
+					type: 'POST',
+					cache: false,
+					data: formData,
+					processData: false,
+					contentType: false
+				}).done(function(res) {
+				}).fail(function(res) {});
+				
+				formData.delete(imgTag[i].getAttribute('id'));
 			}
 		}
 		
+		formData.append('videoUrl', videoID);
 		$.ajax({
 			url: '/editInfo/',
 			type: 'POST',
@@ -51,7 +64,7 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false
 		}).done(function(res) {
-			location.replace(urlhref);
+			// location.replace(urlhref);
 		}).fail(function(res) {});
 		
 	});

@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template.loader import get_template
 import base64
 import os
+import json
 
 from .static.main.alg import translation
 from .static.main.alg import videodownload
@@ -67,7 +68,16 @@ def sendToEditInfo(request):
     print ("Send to edit page")
     imgList = {}
     data = request.POST #QueryDict
-    print (data['videoUrl'])
+
+    for key in request.POST:
+        imgObject = request.POST[key]
+        if key != 'videoUrl':
+            imgObject = json.loads(request.POST[key])
+            print (key, imgObject['curtime'])
+            print (key, imgObject['text'])
+            #print (key, imgObject['src'])
+        else:
+            print (key, imgObject)
 
     return HttpResponse("DONE")
 
