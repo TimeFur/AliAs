@@ -53,8 +53,20 @@ def searchVideo_page(request):
 
 def changeToEdit(request):    
     title = 'EditPage'
-
-    videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser("https://www.youtube.com/watch?v=6ZZX9iIgFoo")
+    url = "https://www.youtube.com/watch?v=6ZZX9iIgFoo"
+    imgsrc = ""
+    
+    #get data from database
+    urlObj = PostUrl.objects.all()
+    
+    for item in urlObj:
+        url = item
+    for key in PostImgList.objects.all():
+        imgItem = PostImgList.objects.get(title = key)
+        imgsrc = imgItem.imgsrc
+        print (key, imgItem.curtime)
+    
+    videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser(url)
     videoTitle = videoObj.getTitle()
     videoInfo = videoObj.getInfo()
     

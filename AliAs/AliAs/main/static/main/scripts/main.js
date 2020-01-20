@@ -64,7 +64,7 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false
 		}).done(function(res) {
-			// location.replace(urlhref);
+			location.replace(urlhref);
 		}).fail(function(res) {});
 		
 	});
