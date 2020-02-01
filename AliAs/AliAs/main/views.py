@@ -16,6 +16,7 @@ from .static.main.alg import videoInfoParse
 POST_IMG_SRC_KEY = "imgSrc"
 POST_VIDEOURL_SRC_KEY = "videoUrl"
 POST_IMGDATA_KEY = 'IMGLIST_DATA'
+URLPARSE_PATTERN = '?v='
 
 def main_page(request):
     print ("AliAs main access")
@@ -51,12 +52,13 @@ def searchVideo_page(request):
 
     return HttpResponse(search_target)
 
-def changeToEdit(request):    
+def changeToEdit(request, videoKey = ''):    
     title = 'EditPage'
     url = "https://www.youtube.com/watch?v=6ZZX9iIgFoo"
     imgsrc = ""
-    
+    print ('Change to Edit page, key = ' + videoKey)
     #get data from database
+    '''
     urlObj = PostUrl.objects.all()
     
     for item in urlObj:
@@ -69,7 +71,7 @@ def changeToEdit(request):
     videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser(url)
     videoTitle = videoObj.getTitle()
     videoInfo = videoObj.getInfo()
-    
+    '''
     #get img data from database
     template = get_template('editPage.html')
     html = template.render(locals())
@@ -86,7 +88,9 @@ def sendToEditInfo(request):
         if key != 'videoUrl':
             imgObject = request.POST[key]
             imgObject = json.loads(request.POST[key])
+            videoKey = imgObject['videoId'][imgObject['videoId'].find(URLPARSE_PATTERN) + len(URLPARSE_PATTERN):]
             PostImgList.objects.create(title = key,
+                                       videoId = videoKey,
                                        content = imgObject['text'],
                                        curtime = imgObject['curtime'],
                                        imgsrc = imgObject['src'])
@@ -149,7 +153,7 @@ def get_VideoUrl(request):
         url = request.POST[POST_VIDEOURL_SRC_KEY]
 
         #setting youtube url as embed type
-        start = url.find('v=') + 2
+        start = url.find(URLPARSE_PATTERN) + len(URLPARSE_PATTERN)
         end = -1
         if url.find('&') > 0:
             end = url.find('&')

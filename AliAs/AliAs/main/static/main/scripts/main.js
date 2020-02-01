@@ -21,7 +21,7 @@ $(document).ready(function(){
 	});
 	
 	$('#editId').click(function(){
-		var urlhref = '/editPage';
+		var urlhref = '/editPage/';
 		var videoID = $("#videoFrameId").attr('videourl');
 		var getDict = 'videoUrl=' + videoID;
 		var imgTag = document.getElementsByTagName('img');
@@ -37,7 +37,8 @@ $(document).ready(function(){
 				
 				var imgDict = JSON.stringify({	'src': imgTag[i].getAttribute('src'),
 												'curtime': imgTag[i].getAttribute('currenttime'),
-												'text': imgTag[i].getAttribute('col-text')});
+												'text': imgTag[i].getAttribute('col-text'),
+												'videoId': videoID});
 				formData.append(imgTag[i].getAttribute('id'), 
 								imgDict);
 								
@@ -64,7 +65,9 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false
 		}).done(function(res) {
-			location.replace(urlhref);
+			//this will store the history
+			var videoKey = videoID.substr(videoID.indexOf("?v=") + 3,);
+			window.location = urlhref + videoKey;
 		}).fail(function(res) {});
 		
 	});
