@@ -54,24 +54,21 @@ def searchVideo_page(request):
 
 def changeToEdit(request, videoKey = ''):    
     title = 'EditPage'
-    url = "https://www.youtube.com/watch?v=6ZZX9iIgFoo"
-    imgsrc = ""
-    print ('Change to Edit page, key = ' + videoKey)
+    imgList = []
+    url = "https://www.youtube.com/watch?v="
+
     #get data from database
-    '''
-    urlObj = PostUrl.objects.all()
+    imgItem = PostImgList.objects.filter(videoId = videoKey)
+    for item in imgItem:
+        imgList.append({'title':item.title,
+                        'imgsrc': item.imgsrc,
+                        'curtime': item.curtime,
+                        'content': item.content})
     
-    for item in urlObj:
-        url = item
-    for key in PostImgList.objects.all():
-        imgItem = PostImgList.objects.get(title = key)
-        imgsrc = imgItem.imgsrc
-        print (key, imgItem.curtime)
-    
-    videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser(url)
+    videoObj = videoInfoParse.VideoInfo('YOUTUBE').getInfoParser(url + videoKey)
     videoTitle = videoObj.getTitle()
-    videoInfo = videoObj.getInfo()
-    '''
+    videoInfo = videoObj.getInfo().text
+    print (len(imgItem))
     #get img data from database
     template = get_template('editPage.html')
     html = template.render(locals())

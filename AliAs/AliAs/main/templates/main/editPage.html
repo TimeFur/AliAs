@@ -91,7 +91,15 @@
 		<div class="col-md-4">
 		  <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
 		  <h3>Image</h3>
-		  <img src = {{imgsrc}} />
+			{% for item in imgList %}
+				<br>
+					<img id={{item.title}} 
+						 src={{item.imgsrc}} 
+						 currentTime={{item.curtime}}
+						 style="width: 50%; height: auto; margin-right:1%; margin-top:2%;" />
+					{{item.content}}
+				</br>
+			{% endfor %}
 		</div>
 		<div class="col-md-4">
 		  <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
